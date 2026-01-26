@@ -2,9 +2,9 @@ import React from 'react';
 
 const HowItWorks: React.FC = () => {
   return (
-    <section className="py-32 border-y border-white/5 bg-data-gray/50">
+    <section className="py-16 md:py-32 border-y border-white/5 bg-data-gray/50">
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl md:text-7xl font-header font-black uppercase mb-20 tracking-tighter">
+        <h2 className="text-3xl md:text-7xl font-header font-black uppercase mb-12 md:mb-20 tracking-tighter">
           How <span className="text-neon-green">WHISTLE</span> Works
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-px bg-white/5">

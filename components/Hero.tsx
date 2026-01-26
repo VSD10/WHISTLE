@@ -10,15 +10,15 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
       <div className="absolute inset-0 circuit-bg z-0"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-deep-black via-transparent to-deep-black z-[1]"></div>
 
-      <div className="obstructed-text top-1/4 -left-10 z-0">RAW</div>
-      <div className="obstructed-text bottom-1/4 -right-10 z-0">TRUSTED</div>
+      <div className="obstructed-text top-1/4 -left-10 z-0 hidden md:block">RAW</div>
+      <div className="obstructed-text bottom-1/4 -right-10 z-0 hidden md:block">TRUSTED</div>
 
       <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-5xl">
           <div className="inline-block border-l-2 border-neon-magenta pl-4 mb-6 animate-slide-up">
             <span className="text-xs text-neon-magenta tracking-[0.3em] font-bold">SYSTEM_INIT // WAITLIST_OPEN</span>
           </div>
-          <h1 className="text-6xl md:text-9xl font-header font-black leading-[0.85] tracking-tighter uppercase mb-8">
+          <h1 className="text-4xl md:text-9xl font-header font-black leading-[0.85] tracking-tighter uppercase mb-8">
             <div className="overflow-hidden">
               <span className="block animate-glitch-reveal delay-100">Raw</span>
             </div>

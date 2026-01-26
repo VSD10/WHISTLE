@@ -31,7 +31,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-deep-black text-white selection:bg-neon-magenta selection:text-white min-h-screen flex flex-col">
+    <div className="bg-deep-black text-white selection:bg-neon-magenta selection:text-white min-h-screen flex flex-col overflow-x-hidden">
       <Header
         onJoinWaitlist={handleOpenWaitlist}
         onNavigate={navigateTo}

@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProblemSection: React.FC = () => {
   return (
-    <section className="py-40 bg-deep-black relative overflow-hidden">
+    <section className="py-20 md:py-40 bg-deep-black relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 lg:col-span-6 z-20">
@@ -14,7 +14,7 @@ const ProblemSection: React.FC = () => {
               </p>
             </div>
           </div>
-          <div className="col-span-12 lg:col-span-7 lg:col-start-5 mt-12 lg:-mt-20 z-30">
+          <div className="col-span-12 lg:col-span-7 lg:col-start-5 mt-8 lg:-mt-20 z-30">
             <div className="data-packet border-t-4 border-t-neon-magenta bg-data-gray/90 shadow-[20px_20px_0px_0px_rgba(255,0,255,0.1)]">
               <span className="text-[10px] text-neon-magenta mb-4 block tracking-widest">[SYSTEM_WARNING]</span>
               <h3 className="text-4xl md:text-5xl font-header uppercase mb-6">The problem with today’s AI</h3>
