@@ -9,10 +9,10 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
     <section id="home" className="relative min-h-screen flex flex-col justify-center pt-24 overflow-hidden">
       <div className="absolute inset-0 circuit-bg z-0"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-deep-black via-transparent to-deep-black z-[1]"></div>
-      
+
       <div className="obstructed-text top-1/4 -left-10 z-0">RAW</div>
       <div className="obstructed-text bottom-1/4 -right-10 z-0">TRUSTED</div>
-      
+
       <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-5xl">
           <div className="inline-block border-l-2 border-neon-magenta pl-4 mb-6">
@@ -31,7 +31,7 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
           </p>
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
             <div className="group relative">
-              <button 
+              <button
                 onClick={onJoinWaitlist}
                 className="px-12 py-5 bg-white text-black font-condensed text-xl hover:bg-neon-green transition-all uppercase skew-x-[-12deg] w-full md:w-auto"
               >
@@ -41,9 +41,14 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
                 Limited Access // [0x334...]
               </div>
             </div>
-            <button className="px-12 py-5 border border-white/20 text-white font-condensed text-xl hover:bg-white/10 transition-all uppercase skew-x-[-12deg] md:ml-4 w-full md:w-auto">
+            <a
+              href="https://prezi.com/p/3b7ln7xt1dlg/whistle-a-weighted-hybrid-intelligent-system-for-trust-logic-evidence/?present=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-12 py-5 border border-white/20 text-white font-condensed text-xl hover:bg-white/10 transition-all uppercase skew-x-[-12deg] md:ml-4 w-full md:w-auto inline-block text-center"
+            >
               Read Manifesto
-            </button>
+            </a>
           </div>
         </div>
       </div>

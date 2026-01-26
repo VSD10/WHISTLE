@@ -1,0 +1,48 @@
+WHISTLE // SYSTEM_API_ENDPOINTS // V1.0
+=======================================
+
+BASE_URL: https://api.whistle.sys/v1
+
+1. AUTHENTICATION [GATEWAY]
+---------------------------
+POST   /auth/signup         - Register new node (operator)
+                              Body: { name, email, password }
+POST   /auth/login          - Initiate session
+                              Body: { email, password }
+POST   /auth/refresh        - Refresh access token
+POST   /auth/logout         - Terminate session
+
+2. VERIFICATION PROTOCOL [CORE_LOGIC]
+-------------------------------------
+POST   /verify/query        - Submit text for multi-agent verification
+                              Body: { query_text, complexity_level, domains[] }
+GET    /verify/status/:id   - Check processing status of a query ID
+GET    /verify/result/:id   - Retrieve final consensus report
+GET    /verify/history      - Get user's verification history
+
+3. SYSTEM METRICS [OBSERVER]
+----------------------------
+GET    /system/health       - Check node status (Active/Offline)
+GET    /system/load         - Current consensus engine load
+GET    /benchmarks          - Public accuracy benchmarks
+
+4. USER DATA [NODE_CONFIG]
+--------------------------
+GET    /user/profile        - Get operator profile
+PUT    /user/settings       - Update notification/API preferences
+POST   /waitlist/join       - Add user to waitlist (Public)
+                              Body: { name, email }
+
+5. PRICING & SUBSCRIPTION
+-------------------------
+GET    /billing/plans       - List available access tiers
+POST   /billing/subscribe   - Upgrade node tier
+                              Body: { plan_id, payment_method }
+
+STATUS CODES:
+200 - OK (Signal Clear)
+201 - Created (Node Initialized)
+401 - Unauthorized (Invalid Key)
+403 - Forbidden (Access Denied)
+429 - Too Many Requests (Rate Limit Exceeded)
+500 - System Error (Logic Failure)
