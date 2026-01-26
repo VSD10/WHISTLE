@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>WHISTLE // DECONSTRUCTED_DATA_STREAM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,FILL@0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Chivo+Mono:wght@100..900&amp;family=Syne:wght@800&amp;display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "neon-green": "#39ff14",
+                        "neon-magenta": "#ff00ff",
+                        "deep-black": "#020202",
+                        "data-gray": "#0a0a0a",
+                        primary: "#39E079"
+                    },
+                    fontFamily: {
+                        header: ["Syne", "sans-serif"],
+                        condensed: ["Archivo Black", "sans-serif"],
+                        mono: ["Chivo Mono", "monospace"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-deep-black text-white font-mono selection:bg-neon-magenta selection:text-white overflow-x-hidden;
+            }
+        }
+        @layer components {
+            .glitch-bar {
+                @apply bg-neon-magenta text-black py-1 px-4 text-[10px] font-bold tracking-widest uppercase relative overflow-hidden;
+                animation: glitch-anim 3s infinite;
+            }
+            .data-packet {
+                @apply border border-neon-green/20 bg-data-gray/60 backdrop-blur-md p-6 relative transition-all duration-300;
+            }
+            .data-packet:hover {
+                @apply border-neon-green/60 bg-data-gray/80 translate-y-[-4px];
+            }
+            .obstructed-text {
+                @apply text-[18vw] leading-[0.7] tracking-tighter font-header opacity-5 absolute pointer-events-none uppercase select-none;
+            }
+            .nav-link {
+                @apply text-[10px] tracking-widest hover:text-neon-green transition-colors uppercase font-bold;
+            }
+            .neon-btn {
+                @apply bg-transparent border border-neon-green text-neon-green px-6 py-2 text-xs font-condensed hover:bg-neon-green hover:text-black transition-all shadow-[0_0_15px_rgba(57,255,20,0.3)];
+            }
+            .magenta-highlight {
+                @apply text-neon-magenta font-bold;
+            }
+            .circuit-bg {
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVDsohF7NSINtAnRk5DHJn0Yfh8p1ljqs6UwRzt2T00WikOuKXHR29VNqHxNCInyqRxpYyNgedbKQeDO_-MHHaNLFqNaZ-h-7KaNJx4NAw5JsydtTFu6ovRJaxlwvj-MuzHRzfuGr4MPyyKRP2mOHlHthHL9vyLCZq8KlyafsqvFUsoz_lPmXTmSoVPb1BrKAtbLNg1pXde9hVC88uybMXjlGxBu76OVG64aRFpE0AQawmT2znobalasyga3cTnfFlGzEVBOIlzRk');
+                background-size: cover;
+                background-position: center;
+                filter: contrast(150%) brightness(20%) grayscale(100%);
+            }
+            .modal-enter {
+                animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .terminal-block {
+                @apply border border-white/10 bg-black/40 p-4 font-mono text-[11px] relative overflow-hidden;
+            }
+            .terminal-header {
+                @apply flex items-center gap-2 border-b border-white/10 pb-2 mb-4;
+            }
+            .status-dot {
+                @apply w-1.5 h-1.5 rounded-full bg-neon-green;
+            }
+        }
+        @keyframes glitch-anim {
+            0% { transform: translate(0); }
+            1% { transform: translate(-2px, 2px); }
+            2% { transform: translate(2px, -2px); }
+            3% { transform: translate(0); }
+            100% { transform: translate(0); }
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
