@@ -15,21 +15,27 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
 
       <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-5xl">
-          <div className="inline-block border-l-2 border-neon-magenta pl-4 mb-6">
+          <div className="inline-block border-l-2 border-neon-magenta pl-4 mb-6 animate-slide-up">
             <span className="text-xs text-neon-magenta tracking-[0.3em] font-bold">SYSTEM_INIT // WAITLIST_OPEN</span>
           </div>
           <h1 className="text-6xl md:text-9xl font-header font-black leading-[0.85] tracking-tighter uppercase mb-8">
-            Raw <br />
-            Unfiltered <br />
-            <span className="text-neon-green relative inline-block">
-              Intelligence
-              <div className="absolute -right-12 top-0 text-[10px] font-mono text-white/30 rotate-90 origin-left tracking-widest uppercase whitespace-nowrap hidden md:block">Verified_Logic</div>
-            </span>
+            <div className="overflow-hidden">
+              <span className="block animate-glitch-reveal delay-100">Raw</span>
+            </div>
+            <div className="overflow-hidden">
+              <span className="block animate-glitch-reveal delay-200">Unfiltered</span>
+            </div>
+            <div className="overflow-hidden">
+              <span className="text-neon-green relative inline-block animate-glitch-reveal delay-300">
+                Intelligence
+                <div className="absolute -right-12 top-0 text-[10px] font-mono text-white/30 rotate-90 origin-left tracking-widest uppercase whitespace-nowrap hidden md:block animate-pulse">Verified_Logic</div>
+              </span>
+            </div>
           </h1>
-          <p className="text-xl md:text-2xl text-white/70 font-mono max-w-2xl mb-12 leading-tight">
+          <p className="text-xl md:text-2xl text-white/70 font-mono max-w-2xl mb-12 leading-tight animate-slide-up delay-500">
             WHISTLE is a multi-agent AI verification system designed to eradicate hallucinations through parallel consensus logic.
           </p>
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center">
+          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center animate-slide-up delay-700">
             <div className="group relative">
               <button
                 onClick={onJoinWaitlist}
