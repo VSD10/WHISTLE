@@ -25,7 +25,7 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
             <div className="overflow-hidden">
               <span className="block animate-glitch-reveal delay-200">Unfiltered</span>
             </div>
-            <div className="overflow-hidden">
+            <div>
               <span className="text-neon-green relative inline-block animate-glitch-reveal delay-300">
                 Intelligence
                 <div className="absolute -right-12 top-0 text-[10px] font-mono text-white/30 rotate-90 origin-left tracking-widest uppercase whitespace-nowrap hidden md:block animate-pulse">Verified_Logic</div>
