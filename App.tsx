@@ -10,10 +10,12 @@ import Footer from './components/Footer';
 import WaitlistModal from './components/WaitlistModal';
 import About from './components/About';
 import Pricing from './components/Pricing';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 const App: React.FC = () => {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'about' | 'pricing'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'about' | 'pricing' | 'login' | 'signup'>('home');
 
   const handleOpenWaitlist = () => {
     setIsWaitlistOpen(true);
@@ -23,19 +25,19 @@ const App: React.FC = () => {
     setIsWaitlistOpen(false);
   };
 
-  const navigateTo = (view: 'home' | 'about' | 'pricing') => {
+  const navigateTo = (view: 'home' | 'about' | 'pricing' | 'login' | 'signup') => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setCurrentView(view);
   };
 
   return (
     <div className="bg-deep-black text-white selection:bg-neon-magenta selection:text-white min-h-screen flex flex-col">
-      <Header 
-        onJoinWaitlist={handleOpenWaitlist} 
+      <Header
+        onJoinWaitlist={handleOpenWaitlist}
         onNavigate={navigateTo}
         currentView={currentView}
       />
-      
+
       <main className="flex-grow">
         {currentView === 'home' && (
           <>
@@ -49,6 +51,8 @@ const App: React.FC = () => {
         )}
         {currentView === 'about' && <About />}
         {currentView === 'pricing' && <Pricing onJoinWaitlist={handleOpenWaitlist} />}
+        {currentView === 'login' && <Login onNavigate={navigateTo} />}
+        {currentView === 'signup' && <Signup onNavigate={navigateTo} />}
       </main>
 
       <Footer />
