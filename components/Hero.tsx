@@ -33,8 +33,7 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
             </div>
           </h1>
           <p className="text-xl md:text-2xl text-white/70 font-mono max-w-2xl mb-12 leading-tight animate-slide-up delay-500">
-            WHISTLE is a multi-agent AI verification system designed to eradicate hallucinations through parallel consensus logic.
-          </p>
+          WHISTLE is a multi-agent AI verification system that improves trust in AI answers through parallel consensus logic. </p>
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center animate-slide-up delay-700">
             <div className="group relative">
               <button

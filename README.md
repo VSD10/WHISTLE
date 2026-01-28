@@ -69,6 +69,10 @@ WHISTLE_SYSTEM/
    ```
    *Access the local node at `http://localhost:5173`*
 
+4. **Access Credentials** (Simulation Mode)
+   - **Email**: `operator@whistle.sys` (or any email)
+   - **Password**: `any_password`
+
 ---
 
 ## // OPERATIONAL_GUIDE

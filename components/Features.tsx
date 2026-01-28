@@ -25,9 +25,9 @@ const Features: React.FC = () => {
 
         <div className="border border-white/20 p-6 md:p-10 relative overflow-hidden hover:border-neon-green transition-colors group">
           <div className="absolute top-0 right-0 w-8 h-8 bg-white/5 flex items-center justify-center font-mono text-white/20 text-[10px]">03</div>
-          <h3 className="text-2xl font-header uppercase mb-4">Hallucination Shield</h3>
+          <h3 className="text-2xl font-header uppercase mb-4">Confidence Scoring</h3>
           <p className="text-xs font-mono text-white/60">
-            Instantly flag conflicting data segments before they reach the end user.
+            Each answer includes a confidence level based on response consistency.
           </p>
         </div>
       </div>

@@ -9,6 +9,7 @@ const ChatInterface: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputValue, setInputValue] = useState('');
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<'account' | 'model' | 'plan'>('account');
 
     const handleExecute = () => {
@@ -38,6 +39,10 @@ const ChatInterface: React.FC = () => {
         setIsSettingsOpen(!isSettingsOpen);
     };
 
+    const toggleHistory = () => {
+        setIsHistoryOpen(!isHistoryOpen);
+    };
+
     const [scrollProgress, setScrollProgress] = useState(0);
     const scrollRef = React.useRef<HTMLDivElement>(null);
 
@@ -47,6 +52,18 @@ const ChatInterface: React.FC = () => {
             const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
             setScrollProgress(Math.min(100, Math.max(0, progress)));
         }
+    };
+
+    // Auto-scroll to bottom when messages change
+    React.useEffect(() => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+        }
+    }, [messages]);
+
+    const handleNewChat = () => {
+        setMessages([]);
+        setInputValue('');
     };
 
     return (
@@ -207,6 +224,63 @@ const ChatInterface: React.FC = () => {
                 </div>
             )}
 
+            {/* History Sidebar */}
+            {isHistoryOpen && (
+                <div className="absolute inset-0 z-[300] bg-black/80 backdrop-blur-sm flex justify-start animate-fade-in">
+                    <div className="w-full max-w-sm bg-deep-black border-r border-neon-green/30 h-full relative flex flex-col shadow-[0_0_50px_rgba(57,255,20,0.1)]">
+                        <div className="p-4 border-b border-white/10 flex items-center justify-between bg-white/5">
+                            <div className="flex items-center gap-2">
+                                <h2 className="text-sm font-header font-black tracking-tighter text-white">SESSION_HISTORY</h2>
+                            </div>
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={toggleHistory}
+                                    className="text-white/50 hover:text-neon-green transition-colors"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                        <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+                            <div className="p-4 border border-neon-green/50 bg-neon-green/5 relative group cursor-pointer hover:bg-neon-green/10 transition-all">
+                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.21 // 14:22</div>
+                                <div className="text-xs font-bold text-neon-green tracking-wide">RAW_INTELLIGENCE_INIT</div>
+                            </div>
+
+                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
+                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.20 // 09:15</div>
+                                <div className="text-xs font-bold text-white tracking-wide">CONSENSUS_LOGIC_TEST</div>
+                            </div>
+
+                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
+                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.18 // 23:44</div>
+                                <div className="text-xs font-bold text-white tracking-wide">AGENT_CROSS_REF_01</div>
+                            </div>
+
+                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
+                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.18 // 18:10</div>
+                                <div className="text-xs font-bold text-white tracking-wide">DECONSTRUCTED_STREAM</div>
+                            </div>
+
+                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
+                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.17 // 11:22</div>
+                                <div className="text-xs font-bold text-white tracking-wide">NEURAL_HANDSHAKE_V2</div>
+                            </div>
+
+                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
+                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.15 // 08:45</div>
+                                <div className="text-xs font-bold text-white tracking-wide">SYSTEM_BOOT_SEQUENCE</div>
+                            </div>
+                        </div>
+                    </div>
+                    {/* Click outside to close */}
+                    <div className="flex-1" onClick={toggleHistory}></div>
+                </div>
+            )}
+
             <header className="z-[130] flex flex-col shrink-0">
                 <div className="glitch-bar flex justify-between items-center border-b border-neon-green/20">
                     <span>LIVE_NODE: 0x882A // DATA_STREAM_STABLE // v2.0.4</span>
@@ -244,6 +318,12 @@ const ChatInterface: React.FC = () => {
                                             <span className="text-[10px]">AGENT_CROSS_REF_01</span>
                                         </div>
                                     </div>
+                                    <button
+                                        onClick={toggleHistory}
+                                        className="w-full mt-4 border border-white/10 py-2 text-[10px] font-bold tracking-widest hover:bg-white/5 hover:text-neon-green transition-all uppercase"
+                                    >
+                                        View_All_Logs
+                                    </button>
                                 </div>
                             </div>
                             <div className="group relative">
@@ -276,11 +356,21 @@ const ChatInterface: React.FC = () => {
                             <span className="text-[8px] text-neon-green font-black">89%</span>
                         </div>
                         <button
+                            onClick={handleNewChat}
+                            className="hidden md:flex items-center gap-2 px-3 py-1 border border-neon-green/30 text-[10px] font-bold tracking-widest text-neon-green hover:bg-neon-green hover:text-black transition-all uppercase"
+                        >
+                            <span className="material-symbols-outlined text-[14px]">add</span>
+                            New_Session
+                        </button>
+                        <button
                             onClick={toggleSettings}
                             className="w-6 h-6 border border-white/10 flex items-center justify-center hover:border-neon-green transition-all relative group overflow-hidden"
+                            aria-label="Settings"
                         >
                             <div className="absolute inset-0 circuit-gear opacity-20"></div>
-                            <span className="material-symbols-outlined text-xs z-10">settings</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 z-10">
+                                <path fillRule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 01-.517.608 7.45 7.45 0 00-.478.198.798.798 0 01-.796-.064l-.453-.324a1.875 1.875 0 00-2.416.2l-.043.044a1.875 1.875 0 00-.205 2.415l.323.452a.798.798 0 01.064.796 7.448 7.448 0 00-.198.478.798.798 0 01-.608.517l-.55.092a1.875 1.875 0 00-1.566 1.849v.06c0 .917.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 01-.064.796l-.324.453a1.875 1.875 0 00.2 2.416l.044.043a1.875 1.875 0 002.415.205l.452-.323a.798.798 0 01.796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.06c.917 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 01.517-.608 7.52 7.52 0 00.478-.198.798.798 0 01.796.064l.453.324a1.875 1.875 0 002.416-.2l.043-.044a1.875 1.875 0 00.205-2.415l-.323-.452a.798.798 0 01-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.092a1.875 1.875 0 001.566-1.849v-.064c0-.917-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 01-.608-.517 7.507 7.507 0 00-.198-.478.798.798 0 01.064-.796l.324-.453a1.875 1.875 0 00-.2-2.416l-.044-.043a1.875 1.875 0 00-2.415-.205l-.452.323a.798.798 0 01-.796.064 7.462 7.462 0 00-.478-.198.798.798 0 01-.517-.608l-.092-.55a1.875 1.875 0 00-1.849-1.566h-.064zM12 9a3 3 0 100 6 3 3 0 000-6z" clipRule="evenodd" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -331,7 +421,9 @@ const ChatInterface: React.FC = () => {
                 <div className="max-w-7xl mx-auto flex flex-col gap-3">
                     <div className="flex items-center gap-4 border border-white/10 p-1 bg-black focus-within:border-neon-green focus-within:shadow-[0_0_15px_rgba(57,255,20,0.1)] transition-all">
                         <div className="flex items-center justify-center w-12 h-12 border-r border-white/10 text-neon-green">
-                            <span className="material-symbols-outlined">terminal</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                                <path fillRule="evenodd" d="M2.25 4.5A2.25 2.25 0 014.5 2.25h15A2.25 2.25 0 0121.75 4.5v15a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25v-15zM8.03 8.47a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 01-1.06-1.06l2.47-2.47-2.47-2.47a.75.75 0 010-1.06zm5.22 6.78a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z" clipRule="evenodd" />
+                            </svg>
                         </div>
                         <input
                             className="terminal-input py-4 px-2"
@@ -346,7 +438,9 @@ const ChatInterface: React.FC = () => {
                             onClick={handleExecute}
                         >
                             <span className="hidden md:inline">EXECUTE_QUERY</span>
-                            <span className="material-symbols-outlined text-sm">bolt</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                                <path fillRule="evenodd" d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z" clipRule="evenodd" />
+                            </svg>
                         </button>
                     </div>
                     <div className="flex flex-wrap items-center justify-between text-[9px] text-white/30 font-bold tracking-[0.2em] px-2">
