@@ -1,4 +1,4 @@
-import { AuthResponse, VerificationResult, SystemMetrics, HistoryItem } from '../types/api';
+import { AuthResponse, VerificationResult, SystemMetrics, HistoryItem, UserSettings, UpdateProfileData } from '../types/api';
 
 const SIMULATION_MODE = true;
 const BASE_URL = 'https://api.whistle.sys/v1';
@@ -69,6 +69,55 @@ class ApiService {
             return this.request<AuthResponse>('/auth/signup', {
                 method: 'POST',
                 body: JSON.stringify({ name, email, password }),
+            });
+        }
+    };
+
+    waitlist = {
+        join: async (name: string, email: string): Promise<{ success: boolean; message: string }> => {
+            if (SIMULATION_MODE) {
+                await new Promise(resolve => setTimeout(resolve, 800));
+                return { success: true, message: "Uplink Established" };
+            }
+            return this.request<{ success: boolean; message: string }>('/waitlist/join', {
+                method: 'POST',
+                body: JSON.stringify({ name, email }),
+            });
+        }
+    };
+
+    user = {
+        updateProfile: async (data: UpdateProfileData): Promise<{ success: boolean; user: any }> => {
+            if (SIMULATION_MODE) {
+                await new Promise(resolve => setTimeout(resolve, 600));
+                return { success: true, user: { ...MOCK_USER, ...data } };
+            }
+            return this.request<{ success: boolean; user: any }>('/user/profile', {
+                method: 'PATCH',
+                body: JSON.stringify(data),
+            });
+        },
+        updateSettings: async (settings: UserSettings): Promise<{ success: boolean }> => {
+            if (SIMULATION_MODE) {
+                await new Promise(resolve => setTimeout(resolve, 600));
+                return { success: true };
+            }
+            return this.request<{ success: boolean }>('/user/settings', {
+                method: 'PUT',
+                body: JSON.stringify(settings),
+            });
+        }
+    };
+
+    subscription = {
+        update: async (planId: string): Promise<{ success: boolean; message: string }> => {
+            if (SIMULATION_MODE) {
+                await new Promise(resolve => setTimeout(resolve, 800));
+                return { success: true, message: `Plan upgraded to ${planId}` };
+            }
+            return this.request<{ success: boolean; message: string }>('/subscription/update', {
+                method: 'POST',
+                body: JSON.stringify({ planId }),
             });
         }
     };

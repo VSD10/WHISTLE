@@ -15,6 +15,8 @@ const ChatInterface: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'account' | 'model' | 'plan'>('account');
     const [history, setHistory] = useState<HistoryItem[]>([]);
     const [metrics, setMetrics] = useState<SystemMetrics | null>(null);
+    const [temp, setTemp] = useState(0.7);
+    const [topP, setTopP] = useState(0.9);
 
     useEffect(() => {
         const loadData = async () => {
@@ -91,6 +93,24 @@ const ChatInterface: React.FC = () => {
     const handleNewChat = () => {
         setMessages([]);
         setInputValue('');
+    };
+
+    const handleUpdateSettings = async () => {
+        try {
+            await api.user.updateSettings({ temperature: temp, top_p: topP, model: 'GPT-4_TURBO' });
+            alert("Settings updated");
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+    const handleManageSubscription = async () => {
+        try {
+            await api.subscription.update('ENTERPRISE_TIER');
+            alert("Subscription updated");
+        } catch (e) {
+            console.error(e);
+        }
     };
 
     return (
@@ -200,17 +220,39 @@ const ChatInterface: React.FC = () => {
                                             <div>
                                                 <div className="flex justify-between text-[10px] mb-2">
                                                     <span>TEMPERATURE</span>
-                                                    <span className="text-neon-green">0.7</span>
+                                                    <span className="text-neon-green">{temp}</span>
                                                 </div>
-                                                <div className="h-1 bg-white/10 w-full"><div className="h-full bg-neon-green w-[70%]"></div></div>
+                                                <input
+                                                    type="range"
+                                                    min="0"
+                                                    max="1"
+                                                    step="0.1"
+                                                    value={temp}
+                                                    onChange={(e) => setTemp(parseFloat(e.target.value))}
+                                                    className="w-full accent-neon-green bg-white/10 h-1 appearance-none cursor-pointer"
+                                                />
                                             </div>
                                             <div>
                                                 <div className="flex justify-between text-[10px] mb-2">
                                                     <span>TOP_P</span>
-                                                    <span className="text-neon-green">0.9</span>
+                                                    <span className="text-neon-green">{topP}</span>
                                                 </div>
-                                                <div className="h-1 bg-white/10 w-full"><div className="h-full bg-neon-green w-[90%]"></div></div>
+                                                <input
+                                                    type="range"
+                                                    min="0"
+                                                    max="1"
+                                                    step="0.1"
+                                                    value={topP}
+                                                    onChange={(e) => setTopP(parseFloat(e.target.value))}
+                                                    className="w-full accent-neon-green bg-white/10 h-1 appearance-none cursor-pointer"
+                                                />
                                             </div>
+                                            <button
+                                                onClick={handleUpdateSettings}
+                                                className="w-full border border-neon-green text-neon-green py-2 text-xs font-bold tracking-widest hover:bg-neon-green hover:text-black transition-all mt-4"
+                                            >
+                                                UPDATE_CONFIG
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -240,7 +282,10 @@ const ChatInterface: React.FC = () => {
                                             </div>
                                         </div>
 
-                                        <button className="bg-neon-green text-black px-6 py-2 text-xs font-bold tracking-widest hover:bg-white transition-colors">
+                                        <button
+                                            onClick={handleManageSubscription}
+                                            className="bg-neon-green text-black px-6 py-2 text-xs font-bold tracking-widest hover:bg-white transition-colors"
+                                        >
                                             MANAGE_SUBSCRIPTION
                                         </button>
                                     </div>

@@ -42,3 +42,15 @@ export interface HistoryItem {
     timestamp: string;
     status: string;
 }
+
+export interface UserSettings {
+    temperature: number;
+    top_p: number;
+    model: string;
+}
+
+export interface UpdateProfileData {
+    name?: string;
+    email?: string;
+}
+

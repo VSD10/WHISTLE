@@ -1,22 +1,32 @@
 import React from 'react';
+import { api } from '../src/services/api';
 
 interface PricingProps {
   onJoinWaitlist: () => void;
 }
 
 const Pricing: React.FC<PricingProps> = ({ onJoinWaitlist }) => {
+  const handleSelectPlan = async (planId: string) => {
+    try {
+      await api.subscription.update(planId);
+      onJoinWaitlist(); // Still open waitlist/success modal for now as per flow
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div className="pt-32 pb-20 container mx-auto px-6 animate-fade-in">
       {/* Header */}
       <div className="text-center mb-20">
         <div className="inline-block border border-neon-green/30 bg-neon-green/5 px-4 py-1 mb-6">
-           <span className="text-neon-green font-mono text-xs tracking-[0.3em] uppercase">System_Access_Levels</span>
+          <span className="text-neon-green font-mono text-xs tracking-[0.3em] uppercase">System_Access_Levels</span>
         </div>
         <h1 className="text-5xl md:text-7xl font-header font-black uppercase tracking-tighter mb-6">
           Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-green to-white">Protocol</span>
         </h1>
         <p className="text-white/60 font-mono text-sm max-w-2xl mx-auto">
-            Select the processing power required for your verification needs. Scale your consensus nodes based on signal complexity.
+          Select the processing power required for your verification needs. Scale your consensus nodes based on signal complexity.
         </p>
       </div>
 
@@ -48,8 +58,8 @@ const Pricing: React.FC<PricingProps> = ({ onJoinWaitlist }) => {
               No API Access
             </li>
           </ul>
-          <button 
-            onClick={onJoinWaitlist}
+          <button
+            onClick={() => handleSelectPlan('FREE_TIER')}
             className="w-full border border-white/20 py-3 text-xs font-mono uppercase tracking-widest hover:bg-white hover:text-black transition-all"
           >
             Initialize_Basic
@@ -60,13 +70,13 @@ const Pricing: React.FC<PricingProps> = ({ onJoinWaitlist }) => {
         <div className="border border-neon-green bg-deep-black p-8 relative group transform md:-translate-y-4 shadow-[0_0_30px_rgba(57,255,20,0.1)] flex flex-col">
           <div className="absolute top-0 left-0 w-full h-1 bg-neon-green"></div>
           <div className="absolute top-4 right-4 text-[10px] font-mono bg-neon-green text-black px-2 py-1 font-bold uppercase">
-             Most Popular
+            Most Popular
           </div>
           <div className="mb-4">
             <span className="text-xs font-mono text-neon-green uppercase tracking-widest">Validator Node</span>
             <div className="flex items-baseline gap-1 mt-2">
-                <span className="text-4xl font-header font-black text-white">499</span>
-                <span className="text-sm font-mono text-white/50">/mo</span>
+              <span className="text-4xl font-header font-black text-white">499</span>
+              <span className="text-sm font-mono text-white/50">/mo</span>
             </div>
           </div>
           <p className="text-xs font-mono text-white/40 mb-8 border-b border-white/10 pb-8">
@@ -90,8 +100,8 @@ const Pricing: React.FC<PricingProps> = ({ onJoinWaitlist }) => {
               Priority Processing Queue
             </li>
           </ul>
-          <button 
-            onClick={onJoinWaitlist}
+          <button
+            onClick={() => handleSelectPlan('VALIDATOR_NODE')}
             className="w-full bg-neon-green py-4 text-xs font-mono font-bold uppercase tracking-widest text-black hover:bg-white transition-all shadow-[0_0_15px_rgba(57,255,20,0.4)]"
           >
             Deploy_Validator
@@ -103,8 +113,8 @@ const Pricing: React.FC<PricingProps> = ({ onJoinWaitlist }) => {
           <div className="mb-4">
             <span className="text-xs font-mono text-neon-magenta uppercase tracking-widest">Architect Node</span>
             <div className="flex items-baseline gap-1 mt-2">
-                <span className="text-4xl font-header font-black text-white">1999</span>
-                <span className="text-sm font-mono text-white/50">/mo</span>
+              <span className="text-4xl font-header font-black text-white">1999</span>
+              <span className="text-sm font-mono text-white/50">/mo</span>
             </div>
           </div>
           <p className="text-xs font-mono text-white/40 mb-8 border-b border-white/10 pb-8">
@@ -128,8 +138,8 @@ const Pricing: React.FC<PricingProps> = ({ onJoinWaitlist }) => {
               24/7 Engineer Support
             </li>
           </ul>
-          <button 
-            onClick={onJoinWaitlist}
+          <button
+            onClick={() => handleSelectPlan('ARCHITECT_NODE')}
             className="w-full border border-neon-magenta text-neon-magenta py-3 text-xs font-mono uppercase tracking-widest hover:bg-neon-magenta hover:text-black transition-all"
           >
             Contact_Sales
@@ -138,9 +148,9 @@ const Pricing: React.FC<PricingProps> = ({ onJoinWaitlist }) => {
       </div>
 
       <div className="mt-20 border-t border-white/10 pt-10 text-center">
-         <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
-            * All tiers are subject to regional availability and network load. Prices in Credits.
-         </p>
+        <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest">
+          * All tiers are subject to regional availability and network load. Prices in Credits.
+        </p>
       </div>
     </div>
   );
