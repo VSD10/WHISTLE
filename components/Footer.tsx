@@ -35,11 +35,11 @@ const Footer: React.FC = () => {
           {/* Links and Status */}
           <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-[10px] text-neon-green font-mono uppercase mb-6 tracking-widest underline underline-offset-8">Development</h4>
+              <h4 className="text-[10px] text-neon-green font-mono uppercase mb-6 tracking-widest underline underline-offset-8">Navigation</h4>
               <ul className="text-[10px] font-mono space-y-4 text-white/50 uppercase">
-                <li><a className="hover:text-white transition-colors" href="#">Protocol_v2</a></li>
-                <li><a className="hover:text-white transition-colors" href="#">API_Reference</a></li>
-                <li><a className="hover:text-white transition-colors" href="#">Agent_Specs</a></li>
+                <li><a className="hover:text-white transition-colors" href="/">Home</a></li>
+                <li><a className="hover:text-white transition-colors" href="/about">About</a></li>
+                <li><a className="hover:text-white transition-colors" href="/pricing">Pricing</a></li>
               </ul>
             </div>
             <div>

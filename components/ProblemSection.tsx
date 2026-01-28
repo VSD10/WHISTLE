@@ -32,13 +32,10 @@ const ProblemSection: React.FC = () => {
                     <span className="text-xs text-white/60">Users often trust a single AI answer without cross-checking.</span>
                   </div>
                 </div>
-                                     <div className="flex items-start gap-4 bg-white/5 p-3 border-l-2 border-neon-magenta">
-                  <span className="material-symbols-outlined text-neon-magenta">fact_check</span>
-                  <div className="flex flex-col">
-                    <span className="text-sm font-bold uppercase">No Internal Cross-Validation</span>
-                    <span className="text-xs text-white/60">Most AI systems rely on one model’s perspective instead of comparing multiple viewpoints.</span>
-                  </div>
-                </div>
+               <p className="text-[10px] text-white/40 pt-4 uppercase tracking-tighter">
+                  Most AI systems rely on one model’s perspective instead of comparing multiple viewpoints.
+                </p>
+                
          
               </div>
             </div>

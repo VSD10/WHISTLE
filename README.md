@@ -1,7 +1,8 @@
 # WHISTLE // AI VERIFICATION SYSTEM
 ### DECONSTRUCTED_DATA_STREAM // V2.0.4
 
-![Whistle System](https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6)
+
+![Whisk_bc2434b5050e7338ae748276e82bb6e4dr (1)](https://github.com/user-attachments/assets/f89377dd-6218-448d-8ab2-fc65ef44a617)
 
 **Whistle** is a decentralized, multi-agent consensus engine designed to verify the "truth" of AI-generated content. By distributing verification across multiple LLM nodes (GPT-4, Claude 3, Gemini), Whistle eliminates single-point bias and provides cryptographic proof of compute for every answer.
 
