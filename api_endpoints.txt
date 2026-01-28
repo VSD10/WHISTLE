@@ -46,3 +46,38 @@ STATUS CODES:
 403 - Forbidden (Access Denied)
 429 - Too Many Requests (Rate Limit Exceeded)
 500 - System Error (Logic Failure)
+
+6. FRONTEND ARCHITECTURE [FILE_MAP]
+-----------------------------------
+CORE:
+- App.tsx                  - Main Application Controller & View Router
+- index.tsx                - Entry Point
+- index.css                - Global Styles & Tailwind Config
+
+COMPONENTS [UI_MODULES]:
+- components/ChatInterface.tsx  - Main Verification Interface (Offline Mode Implemented)
+                                  [Maps to: /verify/query, /verify/history]
+- components/Login.tsx          - Operator Authentication
+                                  [Maps to: /auth/login]
+- components/Signup.tsx         - New Node Registration
+                                  [Maps to: /auth/signup]
+- components/Header.tsx         - System Navigation & Status Bar
+- components/Footer.tsx         - Global Footer
+- components/WaitlistModal.tsx  - Public Access Request Modal
+                                  [Maps to: /waitlist/join]
+- components/Pricing.tsx        - Subscription Tiers View
+                                  [Maps to: /billing/plans]
+
+LANDING_MODULES:
+- components/Hero.tsx           - Initial System Impression
+- components/ProblemSection.tsx - Context Definition
+- components/HowItWorks.tsx     - Logic Flow Explanation
+- components/Features.tsx       - System Capabilities
+- components/Benchmarks.tsx     - Performance Metrics
+- components/Domains.tsx        - Supported Knowledge Bases
+- components/About.tsx          - Mission Statement
+
+SYSTEM_STATE:
+- Current Mode: SIMULATION (Offline)
+- Chat Interface: Active
+- Auth: Mocked
