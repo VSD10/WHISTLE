@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate: (view: 'home' | 'about' | 'pricing' | 'login' | 'signup' | '404') => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="bg-deep-black border-t border-white/10 pt-32 pb-12">
       <div className="container mx-auto px-6">
@@ -20,15 +24,15 @@ const Footer: React.FC = () => {
               DECONSTRUCTING THE MONOLITH. A final year project dedicated to multi-agent AI verification using consensus logic and weighted hybrid intelligence.
             </p>
             <div className="flex gap-4">
-              <a className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" href="#">
+              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" onClick={() => onNavigate('404')}>
                 <span className="material-symbols-outlined text-sm">terminal</span>
-              </a>
-              <a className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" href="#">
+              </button>
+              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" onClick={() => onNavigate('404')}>
                 <span className="material-symbols-outlined text-sm">data_object</span>
-              </a>
-              <a className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" href="#">
+              </button>
+              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" onClick={() => onNavigate('404')}>
                 <span className="material-symbols-outlined text-sm">hub</span>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -45,9 +49,9 @@ const Footer: React.FC = () => {
             <div>
               <h4 className="text-[10px] text-neon-magenta font-mono uppercase mb-6 tracking-widest underline underline-offset-8">Project_Team</h4>
               <ul className="text-[10px] font-mono space-y-4 text-white/50 uppercase">
-                <li><a className="hover:text-white transition-colors" href="#">Lead_Dev_Alpha</a></li>
-                <li><a className="hover:text-white transition-colors" href="#">Logic_Architect</a></li>
-                <li><a className="hover:text-white transition-colors" href="#">Data_Engineer</a></li>
+                <li><button className="hover:text-white transition-colors" onClick={() => onNavigate('404')}>Lead_Dev_Alpha</button></li>
+                <li><button className="hover:text-white transition-colors" onClick={() => onNavigate('404')}>Logic_Architect</button></li>
+                <li><button className="hover:text-white transition-colors" onClick={() => onNavigate('404')}>Data_Engineer</button></li>
               </ul>
             </div>
             <div className="col-span-2 md:col-span-1">

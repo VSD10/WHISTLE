@@ -1,92 +1,170 @@
 # WHISTLE // AI VERIFICATION SYSTEM
-### DECONSTRUCTED_DATA_STREAM // V2.0.4
+### Multi-Agent Consensus for Trustworthy AI Outputs
 
+**WHISTLE** (Weighted Hybrid Intelligent System for Trust, Logic & Evidence) is a multi-agent AI verification system designed to improve trust in AI-generated answers.
 
-![Whisk_bc2434b5050e7338ae748276e82bb6e4dr (1)](https://github.com/user-attachments/assets/f89377dd-6218-448d-8ab2-fc65ef44a617)
+Instead of relying on a single AI model, WHISTLE compares responses from multiple AI agents and applies consensus logic and confidence scoring to produce a more reliable final answer.
 
-**Whistle** is a decentralized, multi-agent consensus engine designed to verify the "truth" of AI-generated content. By distributing verification across multiple LLM nodes (GPT-4, Claude 3, Gemini), Whistle eliminates single-point bias and provides cryptographic proof of compute for every answer.
+This project is developed as an academic and hackathon prototype exploring how AI outputs can be verified before being trusted.
 
-> **CURRENT STATUS**: PROTOTYPE // OFFLINE_SIMULATION_MODE
-> The system is currently running in a high-fidelity simulation mode. The "Neural Link" to the backend consensus engine is simulated to demonstrate the UI/UX architecture.
-
----
-
-## // SYSTEM_ARCHITECTURE
-
-### 1. CORE_STACK
-- **Runtime**: React 19 (Vite)
-- **Styling**: Tailwind CSS + Custom "Glitch" Animations
-- **Language**: TypeScript
-- **State**: React Hooks (Local Simulation)
-
-### 2. KEY_FEATURES
-- **Multi-Agent Consensus**: UI visualizes real-time agreement rates between disparate AI models.
-- **Cryptographic Verification**: Displays SHA-256 hash generation for logic paths.
-- **"Deconstructed" Aesthetic**:
-  - Custom scanline overlays
-  - Neon-green/Magenta data visualization
-  - "Glitch" interaction effects
-  - Raw data stream typography (Chivo Mono / Syne)
-- **Offline Simulation**: Robust error handling and "offline" state visualization for disconnected nodes.
+> **CURRENT STATUS**: PROTOTYPE // DEMONSTRATION MODE
+> The system currently runs in a simulated environment to demonstrate UI, workflow orchestration, and multi-agent verification logic.
 
 ---
 
-## // FILE_STRUCTURE_MAP
+## PROJECT OBJECTIVE
+
+Modern AI systems provide fast responses but may generate incorrect or misleading information. WHISTLE addresses this challenge by introducing a verification layer where multiple AI agents independently analyze the same input.
+
+The system then:
+1.  **Compares outputs**
+2.  **Identifies agreement and conflicts**
+3.  **Produces a verified answer**
+4.  **Assigns a confidence score**
+
+The goal is to make AI usage more transparent, explainable, and trustworthy.
+
+---
+
+## SYSTEM OVERVIEW
+
+WHISTLE is built around a multi-agent consensus workflow:
+
+1.  **User Query Input**
+    A question or task is submitted.
+
+2.  **Parallel AI Analysis**
+    Multiple AI agents process the input independently.
+
+3.  **Consensus & Weighting**
+    Responses are compared using agreement-based logic.
+
+4.  **Verified Output**
+    A final answer is generated with a confidence score.
+
+5.  **(Optional) Trust Layer**
+    Verified results can be recorded for audit or transparency purposes.
+
+---
+
+## CORE FEATURES
+
+### Multi-Agent Verification
+Uses multiple AI agents instead of a single model to reduce reliance on one perspective.
+
+### Consensus Logic
+Identifies common conclusions between AI outputs and reduces the influence of outliers.
+
+### Confidence Scoring
+Each verified answer includes a confidence level based on response agreement.
+
+### Explainable Results
+Users can see why a particular answer was selected.
+
+### Workflow-Based Orchestration
+Designed to integrate with workflow systems (such as Chainlink CRE) for verifiable execution in hackathon environments.
+
+---
+
+## TECHNOLOGY STACK
+
+### Frontend
+-   React (Vite)
+-   TypeScript
+-   Tailwind CSS
+
+### Simulation & Logic
+-   JavaScript-based mock AI responses
+-   Consensus and scoring logic implemented on the client side for demonstration
+
+### Hackathon Integration (Planned)
+-   Chainlink CRE for workflow orchestration
+-   Smart contract interaction for verifiable result recording
+
+---
+
+## FILE STRUCTURE
 
 ```text
-WHISTLE_SYSTEM/
+WHISTLE/
 ├── src/
-│   ├── App.tsx                 # Main Controller & View Router
-│   ├── index.css               # Global Styles (Tailwind + Custom Animations)
-│   └── components/
-│       ├── ChatInterface.tsx   # Main Verification Console (Offline Logic)
-│       ├── Header.tsx          # System Navigation & Status Bar
-│       ├── Hero.tsx            # Landing Page Entry Point
-│       ├── Login/Signup.tsx    # Auth Modules (Mocked)
-│       └── ... (See api_endpoints.txt for full map)
-└── api_endpoints.txt           # Backend API Specification & Frontend Mapping
+│   ├── App.tsx                # Main application router
+│   ├── pages/
+│   │   ├── Home.tsx          # Product overview
+│   │   ├── About.tsx         # Project background and team
+│   │   ├── Demo.tsx          # AI verification demo interface
+│   │   ├── Blog.tsx          # Project articles and updates
+│   │   └── Login.tsx         # Future dashboard access (UI only)
+│   ├── components/
+│   │   ├── ChatInterface.tsx # Multi-agent verification simulation
+│   │   ├── FeatureCards.tsx
+│   │   ├── WorkflowSteps.tsx
+│   │   └── Navbar.tsx
+└── README.md
 ```
 
 ---
 
-## // INITIALIZATION_PROTOCOL
+## GETTING STARTED
 
-**Prerequisites:** Node.js (v18+)
+### Prerequisites
+-   Node.js (v18 or later)
+-   npm or yarn
 
-1. **Clone the Repository**
-   ```bash
-   git clone [REPO_URL]
-   cd whistle-ai-verification
-   ```
+### Installation
 
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+```bash
+git clone https://github.com/your-repo/whistle.git
+cd whistle
+npm install
+npm run dev
+```
 
-3. **Ignite System**
-   ```bash
-   npm run dev
-   ```
-   *Access the local node at `http://localhost:5173`*
-
-4. **Access Credentials** (Simulation Mode)
-   - **Email**: `operator@whistle.sys` (or any email)
-   - **Password**: `any_password`
+Visit: `http://localhost:5173`
 
 ---
 
-## // OPERATIONAL_GUIDE
+## USING THE DEMO
 
-### Chat Interface (Simulation)
-1. Navigate to the **Chat** view (via "Execute Query" or Navigation).
-2. Enter any query into the terminal input.
-3. **Observation**: The system will simulate a "NEURAL_LINK_OFFLINE" state, demonstrating the error handling and data-block rendering logic without an active backend connection.
+1.  Navigate to the **Demo** page.
+2.  Enter a question in the input field.
+3.  Click **Run Verification**.
+4.  The system will simulate:
+    -   Multiple AI responses
+    -   Consensus analysis
+    -   Final verified answer
+    -   Confidence score
 
-### Dashboard
-- **Metrics**: Hover over the "METRICS" indicator in the header to see real-time confidence scores.
-- **History**: Hover over "HISTORY" to view past verification nodes.
+*Note: Current AI responses are simulated for demonstration purposes.*
 
 ---
 
-**© 2026 WHISTLE_SYSTEMS // DECENTRALIZED_TRUTH_PROTOCOL**
+## TEAM
+
+-   **Bathrinath**
+-   **Priyadharshan**
+-   **Dharshan**
+-   **Vasudevan**
+
+---
+
+## FUTURE IMPROVEMENTS
+
+-   Real AI API integration
+-   Dynamic agent weighting
+-   Domain-specific verification models
+-   On-chain storage of verified outputs
+-   Enhanced confidence scoring methods
+
+---
+
+## DISCLAIMER
+
+**WHISTLE is an academic and hackathon prototype.**
+It is intended for research and demonstration purposes only and does not provide professional or automated decision-making services.
+
+---
+
+## LICENSE
+
+MIT License

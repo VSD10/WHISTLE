@@ -2,14 +2,14 @@ import React from 'react';
 
 interface HeaderProps {
   onJoinWaitlist: () => void;
-  onNavigate: (view: 'home' | 'about' | 'pricing' | 'login' | 'signup') => void;
-  currentView: 'home' | 'about' | 'pricing' | 'login' | 'signup';
+  onNavigate: (view: 'home' | 'about' | 'pricing' | 'login' | 'signup' | '404') => void;
+  currentView: 'home' | 'about' | 'pricing' | 'login' | 'signup' | '404';
 }
 
 const Header: React.FC<HeaderProps> = ({ onJoinWaitlist, onNavigate, currentView }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  const handleNavigate = (view: 'home' | 'about' | 'pricing' | 'login' | 'signup') => {
+  const handleNavigate = (view: 'home' | 'about' | 'pricing' | 'login' | 'signup' | '404') => {
     onNavigate(view);
     setIsMobileMenuOpen(false);
   };
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist, onNavigate, currentView
           >
             Pricing
           </button>
-          <a className="nav-link text-white/50 cursor-not-allowed" href="#">Protocol</a>
+          <button className="nav-link text-white/50 cursor-not-allowed" onClick={() => handleNavigate('404')}>Protocol</button>
 
           <div className="flex items-center gap-4 ml-4">
             <button

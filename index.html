@@ -127,6 +127,13 @@
             .status-dot {
                 @apply w-1.5 h-1.5 rounded-full bg-neon-green;
             }
+            .scatter-char {
+                @apply font-header font-black leading-none pointer-events-none select-none;
+                filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.2));
+            }
+            .fragment-label {
+                @apply absolute text-[10px] tracking-[0.4em] font-bold text-neon-magenta/60 uppercase whitespace-nowrap;
+            }
         }
         @keyframes glitch-anim {
             0% { transform: translate(0); }
