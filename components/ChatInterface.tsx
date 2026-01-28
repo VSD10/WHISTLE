@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { api } from '../src/services/api';
+import { HistoryItem, SystemMetrics } from '../src/types/api';
 
 const ChatInterface: React.FC = () => {
     interface Message {
@@ -11,21 +13,46 @@ const ChatInterface: React.FC = () => {
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<'account' | 'model' | 'plan'>('account');
+    const [history, setHistory] = useState<HistoryItem[]>([]);
+    const [metrics, setMetrics] = useState<SystemMetrics | null>(null);
 
-    const handleExecute = () => {
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const [historyData, metricsData] = await Promise.all([
+                    api.verification.getHistory(),
+                    api.system.getMetrics()
+                ]);
+                setHistory(historyData);
+                setMetrics(metricsData);
+            } catch (error) {
+                console.error("Failed to load data", error);
+            }
+        };
+        loadData();
+    }, []);
+
+    const handleExecute = async () => {
         if (inputValue.trim()) {
             const newUserMsg: Message = {
                 role: 'user',
                 content: inputValue,
                 timestamp: new Date().toLocaleTimeString()
             };
-            const newAiMsg: Message = {
-                role: 'ai',
-                content: "NEURAL_LINK_OFFLINE // UNABLE_TO_PROCESS_QUERY. ESTABLISH_UPLINK_TO_CORE_SYSTEMS.",
-                timestamp: new Date().toLocaleTimeString()
-            };
-            setMessages(prev => [...prev, newUserMsg, newAiMsg]);
+
+            setMessages(prev => [...prev, newUserMsg]);
             setInputValue('');
+
+            try {
+                await api.verification.submitQuery(inputValue);
+            } catch (error: any) {
+                const newAiMsg: Message = {
+                    role: 'ai',
+                    content: error.message || "SYSTEM_ERROR",
+                    timestamp: new Date().toLocaleTimeString()
+                };
+                setMessages(prev => [...prev, newAiMsg]);
+            }
         }
     };
 
@@ -245,35 +272,14 @@ const ChatInterface: React.FC = () => {
                         </div>
 
                         <div className="flex-1 overflow-y-auto p-4 space-y-2">
-                            <div className="p-4 border border-neon-green/50 bg-neon-green/5 relative group cursor-pointer hover:bg-neon-green/10 transition-all">
-                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.21 // 14:22</div>
-                                <div className="text-xs font-bold text-neon-green tracking-wide">RAW_INTELLIGENCE_INIT</div>
-                            </div>
+                            {history.map((item) => (
+                                <div key={item.id} className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
+                                    <div className="text-[10px] text-white/40 font-mono mb-1">{item.timestamp}</div>
+                                    <div className="text-xs font-bold text-white tracking-wide">{item.query}</div>
+                                </div>
+                            ))}
 
-                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
-                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.20 // 09:15</div>
-                                <div className="text-xs font-bold text-white tracking-wide">CONSENSUS_LOGIC_TEST</div>
-                            </div>
 
-                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
-                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.18 // 23:44</div>
-                                <div className="text-xs font-bold text-white tracking-wide">AGENT_CROSS_REF_01</div>
-                            </div>
-
-                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
-                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.18 // 18:10</div>
-                                <div className="text-xs font-bold text-white tracking-wide">DECONSTRUCTED_STREAM</div>
-                            </div>
-
-                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
-                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.17 // 11:22</div>
-                                <div className="text-xs font-bold text-white tracking-wide">NEURAL_HANDSHAKE_V2</div>
-                            </div>
-
-                            <div className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
-                                <div className="text-[10px] text-white/40 font-mono mb-1">2024.05.15 // 08:45</div>
-                                <div className="text-xs font-bold text-white tracking-wide">SYSTEM_BOOT_SEQUENCE</div>
-                            </div>
                         </div>
                     </div>
                     {/* Click outside to close */}
@@ -305,18 +311,12 @@ const ChatInterface: React.FC = () => {
                                 <div className="nav-overlay w-80 left-0">
                                     <h3 className="text-[11px] font-bold tracking-widest mb-4 border-b border-white/10 pb-2">PAST_NODES</h3>
                                     <div className="space-y-1">
-                                        <div className="p-3 bg-neon-green/10 border-l-2 border-neon-green flex flex-col mb-2">
-                                            <span className="text-[8px] opacity-40 font-mono">2024.05.21 // 14:22:09</span>
-                                            <span className="text-[10px] font-bold">RAW_INTELLIGENCE_INIT</span>
-                                        </div>
-                                        <div className="p-3 hover:bg-white/5 border-l-2 border-transparent flex flex-col transition-all">
-                                            <span className="text-[8px] opacity-40 font-mono">2024.05.20 // 09:15:44</span>
-                                            <span className="text-[10px]">CONSENSUS_LOGIC_TEST</span>
-                                        </div>
-                                        <div className="p-3 hover:bg-white/5 border-l-2 border-transparent flex flex-col transition-all">
-                                            <span className="text-[8px] opacity-40 font-mono">2024.05.18 // 23:44:12</span>
-                                            <span className="text-[10px]">AGENT_CROSS_REF_01</span>
-                                        </div>
+                                        {history.slice(0, 3).map((item) => (
+                                            <div key={item.id} className="p-3 hover:bg-white/5 border-l-2 border-transparent flex flex-col transition-all">
+                                                <span className="text-[8px] opacity-40 font-mono">{item.timestamp}</span>
+                                                <span className="text-[10px]">{item.query}</span>
+                                            </div>
+                                        ))}
                                     </div>
                                     <button
                                         onClick={toggleHistory}
@@ -336,12 +336,12 @@ const ChatInterface: React.FC = () => {
                                     <div className="grid grid-cols-2 gap-8">
                                         <div>
                                             <h3 className="text-[11px] font-bold tracking-widest mb-4 border-b border-white/10 pb-2 uppercase text-neon-green">Confidence</h3>
-                                            <div className="text-2xl font-header text-white mb-2 tracking-tighter">99.8%</div>
-                                            <div className="h-1 bg-white/10 w-full"><div className="h-full bg-neon-green w-[99.8%]"></div></div>
+                                            <div className="text-2xl font-header text-white mb-2 tracking-tighter">{metrics ? `${(metrics.consensus_rate * 100).toFixed(1)}%` : '0%'}</div>
+                                            <div className="h-1 bg-white/10 w-full"><div className="h-full bg-neon-green" style={{ width: metrics ? `${metrics.consensus_rate * 100}%` : '0%' }}></div></div>
                                         </div>
                                         <div>
                                             <h3 className="text-[11px] font-bold tracking-widest mb-4 border-b border-white/10 pb-2 uppercase text-neon-magenta">Agreement</h3>
-                                            <div className="text-2xl font-header text-white mb-2 tracking-tighter">82.1%</div>
+                                            <div className="text-2xl font-header text-white mb-2 tracking-tighter">{metrics ? '82.1%' : '0%'}</div>
                                             <div className="h-1 bg-white/10 w-full"><div className="h-full bg-neon-magenta w-[82.1%]"></div></div>
                                         </div>
                                     </div>

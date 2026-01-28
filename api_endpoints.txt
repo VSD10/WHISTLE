@@ -81,3 +81,58 @@ SYSTEM_STATE:
 - Current Mode: SIMULATION (Offline)
 - Chat Interface: Active
 - Auth: Mocked
+
+
+
+API Service Layer Integration
+I have successfully integrated a robust API service layer into the application. This allows the frontend to communicate with backend services while maintaining a "Simulation Mode" for development and testing without a live server.
+
+Changes Implemented
+1. Service Layer
+Created 
+src/services/api.ts
+: This file contains the 
+ApiService
+ class which handles all API requests.
+Simulation Mode: Currently set to true. It returns mock data (with simulated latency) for all endpoints.
+Live Mode: When SIMULATION_MODE is set to false, it will make real HTTP requests to https://api.whistle.sys/v1.
+2. Type Definitions
+Created 
+src/types/api.ts
+: Defined TypeScript interfaces for 
+User
+, 
+AuthResponse
+, 
+VerificationQuery
+, 
+VerificationResult
+, 
+SystemMetrics
+, and 
+HistoryItem
+.
+3. Component Refactoring
+ChatInterface.tsx
+:
+Now fetches History and Metrics from the 
+ApiService
+ instead of using hardcoded data.
+Submits queries via api.verification.submitQuery.
+Displays dynamic history in the sidebar and dropdown.
+Displays dynamic metrics in the header.
+Login.tsx
+:
+Uses api.auth.login for authentication.
+Signup.tsx
+:
+Uses api.auth.signup for registration.
+Verification
+Simulation Mode: The app should continue to function exactly as before (login works, chat returns "NEURAL_LINK_OFFLINE" error as simulated, history loads).
+Code Structure: The code is now structured to easily switch to a real backend by simply toggling a flag in 
+src/services/api.ts
+.
+Next Steps
+To connect to a real backend, update BASE_URL and set SIMULATION_MODE = false in 
+src/services/api.ts
+.

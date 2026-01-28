@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { api } from '../src/services/api';
 
 interface LoginProps {
     onNavigate: (view: 'signup' | 'home' | 'login' | 'chat') => void;
@@ -8,13 +9,16 @@ const Login: React.FC<LoginProps> = ({ onNavigate }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Login attempt", { email, password });
-        // Mock login logic
-        setTimeout(() => {
+        try {
+            await api.auth.login(email, password);
             onNavigate('chat');
-        }, 1000);
+        } catch (error) {
+            console.error("Login failed", error);
+            // In a real app, we'd show an error message to the user
+            alert("Login failed: " + (error as Error).message);
+        }
     };
 
     return (

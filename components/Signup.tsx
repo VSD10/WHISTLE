@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { api } from '../src/services/api';
 
 interface SignupProps {
     onNavigate: (view: 'login' | 'home' | 'signup' | 'chat') => void;
@@ -9,13 +10,15 @@ const Signup: React.FC<SignupProps> = ({ onNavigate }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Signup attempt", { name, email, password });
-        // Mock signup logic
-        setTimeout(() => {
+        try {
+            await api.auth.signup(name, email, password);
             onNavigate('chat');
-        }, 1000);
+        } catch (error) {
+            console.error("Signup failed", error);
+            alert("Signup failed: " + (error as Error).message);
+        }
     };
 
     return (
