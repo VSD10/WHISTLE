@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import ProblemSection from './components/ProblemSection';
 import HowItWorks from './components/HowItWorks';
+import SystemWorkflow from './components/SystemWorkflow';
 import Features from './components/Features';
 import Benchmarks from './components/Benchmarks';
 import Domains from './components/Domains';
@@ -48,6 +49,7 @@ const App: React.FC = () => {
             <Hero onJoinWaitlist={handleOpenWaitlist} />
             <ProblemSection />
             <HowItWorks />
+            <SystemWorkflow />
             <Features />
             <Benchmarks />
             <Domains />
@@ -56,7 +58,6 @@ const App: React.FC = () => {
         {currentView === 'about' && <About />}
         {currentView === 'pricing' && <Pricing onJoinWaitlist={handleOpenWaitlist} />}
         {currentView === 'login' && <Login onNavigate={navigateTo} />}
-        {currentView === 'signup' && <Signup onNavigate={navigateTo} />}
         {currentView === 'signup' && <Signup onNavigate={navigateTo} />}
         {currentView === 'chat' && <ChatInterface />}
         {currentView === '404' && <NotFound onNavigate={navigateTo} />}
