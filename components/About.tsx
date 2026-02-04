@@ -123,80 +123,80 @@ const About: React.FC = () => {
               ACTIVE_SQUAD: 04 // NODES_SYNCED
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-px bg-white/10">
-            {/* Member 1: Bathrinath */}
-            <div className="bg-data-gray p-8 group hover:bg-neon-green/5 transition-colors">
-              <div className="flex justify-between items-start mb-12">
-                <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-white/20 text-4xl group-hover:text-neon-green">person</span>
-                </div>
-                <div className="flex items-center gap-2 px-2 py-1 bg-neon-green/10 text-neon-green text-[8px] font-bold">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Member 1: Dharshan */}
+            <div className="bg-data-gray border border-white/5 group hover:border-neon-green/40 transition-all duration-300">
+              <div className="relative w-full h-80 bg-white/5 overflow-hidden">
+                <img src="/DHARHSAN.png" alt="Dharshan" className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green text-[8px] font-bold backdrop-blur-sm">
                   <span className="status-dot"></span>
-                  STATUS: ACTIVE
+                  ACTIVE
                 </div>
               </div>
-              <h4 className="text-2xl font-header uppercase mb-1">Bathrinath</h4>
-              <p className="text-[9px] text-white/40 font-mono uppercase tracking-widest mb-6 underline underline-offset-4 decoration-neon-green">Lead Developer</p>
-              <div className="space-y-2 text-[10px] font-mono text-white/60">
-                <div className="flex justify-between"><span>UID:</span><span>#001_BATHRI</span></div>
-                <div className="flex justify-between"><span>DEPT:</span><span>CORE_LOGIC</span></div>
+              <div className="p-6">
+                <h4 className="text-2xl font-header uppercase mb-1">Dharshan</h4>
+                <p className="text-[10px] text-neon-green font-mono uppercase tracking-widest mb-4">Lead Developer</p>
+                <div className="space-y-2 text-[10px] font-mono text-white/60 border-t border-white/10 pt-4">
+                  <div className="flex justify-between"><span>UID:</span><span>#001_DHARSH</span></div>
+                  <div className="flex justify-between"><span>DEPT:</span><span>CORE_LOGIC</span></div>
+                </div>
               </div>
             </div>
 
             {/* Member 2: Priyadharshan */}
-            <div className="bg-data-gray p-8 group hover:bg-neon-magenta/5 transition-colors">
-              <div className="flex justify-between items-start mb-12">
-                <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-white/20 text-4xl group-hover:text-neon-magenta">person</span>
-                </div>
-                <div className="flex items-center gap-2 px-2 py-1 bg-neon-green/10 text-neon-green text-[8px] font-bold">
+            <div className="bg-data-gray border border-white/5 group hover:border-neon-magenta/40 transition-all duration-300">
+              <div className="relative w-full h-80 bg-white/5 overflow-hidden">
+                <img src="/DHARHSAN.png" alt="Priyadharshan" className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green text-[8px] font-bold backdrop-blur-sm">
                   <span className="status-dot"></span>
-                  STATUS: ACTIVE
+                  ACTIVE
                 </div>
               </div>
-              <h4 className="text-2xl font-header uppercase mb-1">Priyadharshan</h4>
-              <p className="text-[9px] text-white/40 font-mono uppercase tracking-widest mb-6 underline underline-offset-4 decoration-neon-magenta">Logic Architect</p>
-              <div className="space-y-2 text-[10px] font-mono text-white/60">
-                <div className="flex justify-between"><span>UID:</span><span>#002_PRIYA</span></div>
-                <div className="flex justify-between"><span>DEPT:</span><span>CONSENSUS_ENG</span></div>
+              <div className="p-6">
+                <h4 className="text-2xl font-header uppercase mb-1">Priyadharshan</h4>
+                <p className="text-[10px] text-neon-magenta font-mono uppercase tracking-widest mb-4">Logic Architect</p>
+                <div className="space-y-2 text-[10px] font-mono text-white/60 border-t border-white/10 pt-4">
+                  <div className="flex justify-between"><span>UID:</span><span>#002_PRIYA</span></div>
+                  <div className="flex justify-between"><span>DEPT:</span><span>CONSENSUS_ENG</span></div>
+                </div>
               </div>
             </div>
 
-            {/* Member 3: Dharshan */}
-            <div className="bg-data-gray p-8 group hover:bg-neon-green/5 transition-colors">
-              <div className="flex justify-between items-start mb-12">
-                <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-white/20 text-4xl group-hover:text-neon-green">person</span>
-                </div>
-                <div className="flex items-center gap-2 px-2 py-1 bg-neon-green/10 text-neon-green text-[8px] font-bold">
+            {/* Member 3: Bathrinath */}
+            <div className="bg-data-gray border border-white/5 group hover:border-neon-green/40 transition-all duration-300">
+              <div className="relative w-full h-80 bg-white/5 overflow-hidden">
+                <img src="/DHARHSAN.png" alt="Bathrinath" className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green text-[8px] font-bold backdrop-blur-sm">
                   <span className="status-dot"></span>
-                  STATUS: ACTIVE
+                  ACTIVE
                 </div>
               </div>
-              <h4 className="text-2xl font-header uppercase mb-1">Dharshan</h4>
-              <p className="text-[9px] text-white/40 font-mono uppercase tracking-widest mb-6 underline underline-offset-4 decoration-neon-green">Data Engineer</p>
-              <div className="space-y-2 text-[10px] font-mono text-white/60">
-                <div className="flex justify-between"><span>UID:</span><span>#003_DHARSH</span></div>
-                <div className="flex justify-between"><span>DEPT:</span><span>PIPELINE_DEV</span></div>
+              <div className="p-6">
+                <h4 className="text-2xl font-header uppercase mb-1">Bathrinath</h4>
+                <p className="text-[10px] text-neon-green font-mono uppercase tracking-widest mb-4">Data Engineer</p>
+                <div className="space-y-2 text-[10px] font-mono text-white/60 border-t border-white/10 pt-4">
+                  <div className="flex justify-between"><span>UID:</span><span>#003_BATHRI</span></div>
+                  <div className="flex justify-between"><span>DEPT:</span><span>PIPELINE_DEV</span></div>
+                </div>
               </div>
             </div>
 
             {/* Member 4: Vasudevan */}
-            <div className="bg-data-gray p-8 group hover:bg-neon-magenta/5 transition-colors">
-              <div className="flex justify-between items-start mb-12">
-                <div className="w-16 h-16 bg-white/5 border border-white/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-white/20 text-4xl group-hover:text-neon-magenta">person</span>
-                </div>
-                <div className="flex items-center gap-2 px-2 py-1 bg-neon-green/10 text-neon-green text-[8px] font-bold">
+            <div className="bg-data-gray border border-white/5 group hover:border-neon-magenta/40 transition-all duration-300">
+              <div className="relative w-full h-80 bg-white/5 overflow-hidden">
+                <img src="/DHARHSAN.png" alt="Vasudevan" className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green text-[8px] font-bold backdrop-blur-sm">
                   <span className="status-dot"></span>
-                  STATUS: ACTIVE
+                  ACTIVE
                 </div>
               </div>
-              <h4 className="text-2xl font-header uppercase mb-1">Vasudevan</h4>
-              <p className="text-[9px] text-white/40 font-mono uppercase tracking-widest mb-6 underline underline-offset-4 decoration-neon-magenta">Interface Designer</p>
-              <div className="space-y-2 text-[10px] font-mono text-white/60">
-                <div className="flex justify-between"><span>UID:</span><span>#004_VASU</span></div>
-                <div className="flex justify-between"><span>DEPT:</span><span>DECON_VISUAL</span></div>
+              <div className="p-6">
+                <h4 className="text-2xl font-header uppercase mb-1">Vasudevan</h4>
+                <p className="text-[10px] text-neon-magenta font-mono uppercase tracking-widest mb-4">Interface Designer</p>
+                <div className="space-y-2 text-[10px] font-mono text-white/60 border-t border-white/10 pt-4">
+                  <div className="flex justify-between"><span>UID:</span><span>#004_VASU</span></div>
+                  <div className="flex justify-between"><span>DEPT:</span><span>DECON_VISUAL</span></div>
+                </div>
               </div>
             </div>
           </div>
