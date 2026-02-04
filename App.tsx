@@ -20,6 +20,7 @@ import ResetPassword from './components/ResetPassword';
 import ChatInterface from './components/ChatInterface';
 import NotFound from './components/NotFound';
 import LoadingScreen from './components/LoadingScreen';
+import Changelog from './components/Changelog';
 
 // Home page component
 const HomePage: React.FC<{ onJoinWaitlist: () => void }> = ({ onJoinWaitlist }) => (
@@ -107,6 +108,16 @@ const App: React.FC = () => {
               <ProtectedRoute>
                 <ChatInterface />
               </ProtectedRoute>
+            } />
+
+            <Route path="/changelog" element={
+              <>
+                <Header onJoinWaitlist={handleOpenWaitlist} />
+                <main className="flex-grow">
+                  <Changelog />
+                </main>
+                <Footer />
+              </>
             } />
 
             {/* 404 route */}

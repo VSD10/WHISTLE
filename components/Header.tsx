@@ -58,6 +58,12 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
           >
             Pricing
           </NavLink>
+          <NavLink
+            to="/changelog"
+            className={`nav-link ${isActive('/changelog') ? 'text-neon-green' : 'text-white'}`}
+          >
+            Updates
+          </NavLink>
           <button className="nav-link text-white/50 cursor-not-allowed">Protocol</button>
 
           <div className="flex items-center gap-4 ml-4 pl-4 border-l border-white/10">
@@ -152,6 +158,13 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
             onClick={closeMobileMenu}
           >
             Pricing
+          </NavLink>
+          <NavLink
+            to="/changelog"
+            className={`text-2xl font-header uppercase tracking-widest ${isActive('/changelog') ? 'text-neon-green' : 'text-white'}`}
+            onClick={closeMobileMenu}
+          >
+            Updates
           </NavLink>
           <div className="w-12 h-[1px] bg-white/20 my-2"></div>
 
