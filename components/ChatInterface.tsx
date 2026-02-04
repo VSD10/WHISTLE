@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../src/context/AuthContext';
 import { api } from '../src/services/api';
 import { HistoryItem, SystemMetrics } from '../src/types/api';
@@ -22,6 +22,16 @@ const ChatInterface: React.FC = () => {
 
     const navigate = useNavigate();
     const { user, signOut } = useAuth();
+
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state?.openSettings) {
+            setIsSettingsOpen(true);
+            // Optional: Clear state so it doesn't reopen on refresh, though React Router state is persistent
+            // navigate(location.pathname, { replace: true, state: {} });
+        }
+    }, [location]);
 
     useEffect(() => {
         const loadData = async () => {
@@ -187,22 +197,56 @@ const ChatInterface: React.FC = () => {
                                 <div className="space-y-8 animate-slide-up">
                                     <div>
                                         <h3 className="text-neon-green text-sm font-bold tracking-widest mb-4 border-b border-white/10 pb-2">USER_PROFILE</h3>
+                                        {/* Profile Header */}
+                                        <div className="flex flex-col items-center mb-8 pb-8 border-b border-white/10 relative">
+                                            <div className="relative group mb-4">
+                                                {user?.user_metadata?.avatar_url ? (
+                                                    <img
+                                                        src={user.user_metadata.avatar_url}
+                                                        alt="Profile"
+                                                        className="w-24 h-24 rounded-full border-2 border-neon-green/50 object-cover shadow-[0_0_20px_rgba(57,255,20,0.2)]"
+                                                        onError={(e) => {
+                                                            (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=' + (user?.email || 'User') + '&background=random';
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <div className="w-24 h-24 rounded-full bg-neon-green/10 border-2 border-neon-green/50 flex items-center justify-center text-neon-green shadow-[0_0_20px_rgba(57,255,20,0.2)]">
+                                                        <span className="material-symbols-outlined text-4xl">person</span>
+                                                    </div>
+                                                )}
+                                            </div>
+
+
+                                            <h2 className="text-lg font-bold text-white uppercase tracking-widest">{user?.user_metadata?.name || 'UNKNOWN_OPERATOR'}</h2>
+                                            <p className="text-xs text-neon-green font-mono mt-1">ID: {user?.id?.substring(0, 8)}</p>
+                                        </div>
+
                                         <div className="grid gap-4">
-                                            <div className="bg-white/5 p-4 border border-white/10">
-                                                <label className="block text-[10px] text-white/40 mb-1">OPERATOR_NAME</label>
-                                                <div className="font-mono text-white">{user?.user_metadata?.name || user?.email?.split('@')[0] || 'UNKNOWN'}</div>
+                                            <div className="bg-white/5 p-4 border border-white/10 flex items-center justify-between">
+                                                <div>
+                                                    <label className="block text-[10px] text-white/40 mb-1">EMAIL_UPLINK</label>
+                                                    <div className="font-mono text-white text-sm">{user?.email || 'NOT_CONNECTED'}</div>
+                                                </div>
+                                                <span className="material-symbols-outlined text-white/20">mail</span>
                                             </div>
-                                            <div className="bg-white/5 p-4 border border-white/10">
-                                                <label className="block text-[10px] text-white/40 mb-1">EMAIL_UPLINK</label>
-                                                <div className="font-mono text-white">{user?.email || 'NOT_CONNECTED'}</div>
+
+                                            <div className="bg-white/5 p-4 border border-white/10 flex items-center justify-between">
+                                                <div>
+                                                    <label className="block text-[10px] text-white/40 mb-1">AUTH_PROVIDER</label>
+                                                    <div className="font-mono text-white uppercase text-sm">{user?.app_metadata?.provider || 'EMAIL'}</div>
+                                                </div>
+                                                <span className="material-symbols-outlined text-white/20">lock</span>
                                             </div>
-                                            <div className="bg-white/5 p-4 border border-white/10">
-                                                <label className="block text-[10px] text-white/40 mb-1">USER_ID</label>
-                                                <div className="font-mono text-white text-xs">{user?.id?.substring(0, 16) || 'N/A'}...</div>
-                                            </div>
-                                            <div className="bg-white/5 p-4 border border-white/10">
-                                                <label className="block text-[10px] text-white/40 mb-1">AUTH_PROVIDER</label>
-                                                <div className="font-mono text-white uppercase">{user?.app_metadata?.provider || 'EMAIL'}</div>
+
+                                            <div className="bg-white/5 p-4 border border-white/10 flex items-center justify-between">
+                                                <div>
+                                                    <label className="block text-[10px] text-white/40 mb-1">ACCOUNT_STATUS</label>
+                                                    <div className="font-mono text-neon-green uppercase text-sm flex items-center gap-2">
+                                                        <span className="w-2 h-2 bg-neon-green rounded-full animate-pulse"></span>
+                                                        ACTIVE_NODE
+                                                    </div>
+                                                </div>
+                                                <span className="material-symbols-outlined text-white/20">verified_user</span>
                                             </div>
                                         </div>
                                     </div>
@@ -253,7 +297,13 @@ const ChatInterface: React.FC = () => {
                                                     max="1"
                                                     step="0.1"
                                                     value={temp}
-                                                    onChange={(e) => setTemp(parseFloat(e.target.value))}
+                                                    onChange={(e) => {
+                                                        const newVal = parseFloat(e.target.value);
+                                                        setTemp(newVal);
+                                                        // Auto-save debounced or on change
+                                                    }}
+                                                    onMouseUp={handleUpdateSettings}
+                                                    onTouchEnd={handleUpdateSettings}
                                                     className="w-full accent-neon-green bg-white/10 h-1 appearance-none cursor-pointer"
                                                 />
                                             </div>
@@ -268,16 +318,15 @@ const ChatInterface: React.FC = () => {
                                                     max="1"
                                                     step="0.1"
                                                     value={topP}
-                                                    onChange={(e) => setTopP(parseFloat(e.target.value))}
+                                                    onChange={(e) => {
+                                                        const newVal = parseFloat(e.target.value);
+                                                        setTopP(newVal);
+                                                    }}
+                                                    onMouseUp={handleUpdateSettings}
+                                                    onTouchEnd={handleUpdateSettings}
                                                     className="w-full accent-neon-green bg-white/10 h-1 appearance-none cursor-pointer"
                                                 />
                                             </div>
-                                            <button
-                                                onClick={handleUpdateSettings}
-                                                className="w-full border border-neon-green text-neon-green py-2 text-xs font-bold tracking-widest hover:bg-neon-green hover:text-black transition-all mt-4"
-                                            >
-                                                UPDATE_CONFIG
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -319,43 +368,46 @@ const ChatInterface: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            )}
+            )
+            }
 
             {/* History Sidebar */}
-            {isHistoryOpen && (
-                <div className="absolute inset-0 z-[300] bg-black/80 backdrop-blur-sm flex justify-start animate-fade-in">
-                    <div className="w-full max-w-sm bg-deep-black border-r border-neon-green/30 h-full relative flex flex-col shadow-[0_0_50px_rgba(57,255,20,0.1)]">
-                        <div className="p-4 border-b border-white/10 flex items-center justify-between bg-white/5">
-                            <div className="flex items-center gap-2">
-                                <h2 className="text-sm font-header font-black tracking-tighter text-white">SESSION_HISTORY</h2>
-                            </div>
-                            <div className="flex gap-2">
-                                <button
-                                    onClick={toggleHistory}
-                                    className="text-white/50 hover:text-neon-green transition-colors"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                                        <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="flex-1 overflow-y-auto p-4 space-y-2">
-                            {history.map((item) => (
-                                <div key={item.id} className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
-                                    <div className="text-[10px] text-white/40 font-mono mb-1">{item.timestamp}</div>
-                                    <div className="text-xs font-bold text-white tracking-wide">{item.query}</div>
+            {
+                isHistoryOpen && (
+                    <div className="absolute inset-0 z-[300] bg-black/80 backdrop-blur-sm flex justify-start animate-fade-in">
+                        <div className="w-full max-w-sm bg-deep-black border-r border-neon-green/30 h-full relative flex flex-col shadow-[0_0_50px_rgba(57,255,20,0.1)]">
+                            <div className="p-4 border-b border-white/10 flex items-center justify-between bg-white/5">
+                                <div className="flex items-center gap-2">
+                                    <h2 className="text-sm font-header font-black tracking-tighter text-white">SESSION_HISTORY</h2>
                                 </div>
-                            ))}
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={toggleHistory}
+                                        className="text-white/50 hover:text-neon-green transition-colors"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                            <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="flex-1 overflow-y-auto p-4 space-y-2">
+                                {history.map((item) => (
+                                    <div key={item.id} className="p-4 border border-white/10 bg-transparent relative group cursor-pointer hover:border-white/30 hover:bg-white/5 transition-all">
+                                        <div className="text-[10px] text-white/40 font-mono mb-1">{item.timestamp}</div>
+                                        <div className="text-xs font-bold text-white tracking-wide">{item.query}</div>
+                                    </div>
+                                ))}
 
 
+                            </div>
                         </div>
+                        {/* Click outside to close */}
+                        <div className="flex-1" onClick={toggleHistory}></div>
                     </div>
-                    {/* Click outside to close */}
-                    <div className="flex-1" onClick={toggleHistory}></div>
-                </div>
-            )}
+                )
+            }
 
             <header className="z-[130] flex flex-col shrink-0">
                 <div className="glitch-bar flex justify-between items-center border-b border-neon-green/20">
@@ -533,7 +585,7 @@ const ChatInterface: React.FC = () => {
                     </div>
                 </div>
             </footer>
-        </div>
+        </div >
     );
 };
 

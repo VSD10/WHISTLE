@@ -11,7 +11,7 @@ interface AuthContextType {
     signInWithGoogle: () => Promise<{ error: AuthError | null }>;
     signInWithGithub: () => Promise<{ error: AuthError | null }>;
     signOut: () => Promise<void>;
-    updateProfile: (data: { name?: string }) => Promise<void>;
+    updateProfile: (data: { name?: string; avatar_url?: string }) => Promise<void>;
     resetPassword: (email: string) => Promise<{ error: AuthError | null }>;
     updatePassword: (newPassword: string) => Promise<{ error: AuthError | null }>;
 }
@@ -90,12 +90,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         await supabase.auth.signOut();
     };
 
-    const updateProfile = async (data: { name?: string }) => {
+    const updateProfile = async (data: { name?: string; avatar_url?: string }) => {
         if (!user) return;
 
-        await supabase.auth.updateUser({
+        const { data: { user: updatedUser }, error } = await supabase.auth.updateUser({
             data,
         });
+
+        if (updatedUser) {
+            setUser(updatedUser);
+        }
     };
 
     const resetPassword = async (email: string) => {
