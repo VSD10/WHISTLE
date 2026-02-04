@@ -1,18 +1,19 @@
 import React from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 
 interface HeaderProps {
   onJoinWaitlist: () => void;
-  onNavigate: (view: 'home' | 'about' | 'pricing' | 'login' | 'signup' | '404') => void;
-  currentView: 'home' | 'about' | 'pricing' | 'login' | 'signup' | '404';
 }
 
-const Header: React.FC<HeaderProps> = ({ onJoinWaitlist, onNavigate, currentView }) => {
+const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const location = useLocation();
 
-  const handleNavigate = (view: 'home' | 'about' | 'pricing' | 'login' | 'signup' | '404') => {
-    onNavigate(view);
+  const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <>
@@ -20,49 +21,49 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist, onNavigate, currentView
         Project Highlight: Multi-agent AI verification using consensus logic // STATUS: PRE_ALPHA
       </div>
       <nav className="fixed top-6 left-0 right-0 z-[100] px-6 py-4 flex justify-between items-center bg-deep-black/50 backdrop-blur-md border-b border-white/5">
-        <div
+        <Link
+          to="/"
           className="flex items-center gap-2 cursor-pointer group"
-          onClick={() => handleNavigate('home')}
         >
           <span className="material-symbols-outlined text-neon-green group-hover:rotate-90 transition-transform duration-500">radar</span>
           <span className="font-header text-2xl tracking-tighter">WHISTLE</span>
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
-          <button
-            className={`nav-link ${currentView === 'home' ? 'text-neon-green' : 'text-white'}`}
-            onClick={() => handleNavigate('home')}
+          <NavLink
+            to="/"
+            className={`nav-link ${isActive('/') ? 'text-neon-green' : 'text-white'}`}
           >
             Home
-          </button>
-          <button
-            className={`nav-link ${currentView === 'about' ? 'text-neon-green' : 'text-white'}`}
-            onClick={() => handleNavigate('about')}
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={`nav-link ${isActive('/about') ? 'text-neon-green' : 'text-white'}`}
           >
             About
-          </button>
-          <button
-            className={`nav-link ${currentView === 'pricing' ? 'text-neon-green' : 'text-white'}`}
-            onClick={() => handleNavigate('pricing')}
+          </NavLink>
+          <NavLink
+            to="/pricing"
+            className={`nav-link ${isActive('/pricing') ? 'text-neon-green' : 'text-white'}`}
           >
             Pricing
-          </button>
-          <button className="nav-link text-white/50 cursor-not-allowed" onClick={() => handleNavigate('404')}>Protocol</button>
+          </NavLink>
+          <button className="nav-link text-white/50 cursor-not-allowed">Protocol</button>
 
           <div className="flex items-center gap-4 ml-4">
-            <button
-              onClick={() => handleNavigate('login')}
-              className={`nav-link ${currentView === 'login' ? 'text-neon-green' : 'text-white'}`}
+            <NavLink
+              to="/login"
+              className={`nav-link ${isActive('/login') ? 'text-neon-green' : 'text-white'}`}
             >
               Login
-            </button>
-            <button
-              onClick={() => handleNavigate('signup')}
+            </NavLink>
+            <NavLink
+              to="/signup"
               className="neon-btn"
             >
               Sign Up
-            </button>
+            </NavLink>
           </div>
         </div>
 
@@ -82,37 +83,42 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist, onNavigate, currentView
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[90] bg-deep-black/95 backdrop-blur-xl pt-24 px-6 flex flex-col items-center gap-8 animate-fade-in md:hidden">
-          <button
-            className={`text-2xl font-header uppercase tracking-widest ${currentView === 'home' ? 'text-neon-green' : 'text-white'}`}
-            onClick={() => handleNavigate('home')}
+          <NavLink
+            to="/"
+            className={`text-2xl font-header uppercase tracking-widest ${isActive('/') ? 'text-neon-green' : 'text-white'}`}
+            onClick={closeMobileMenu}
           >
             Home
-          </button>
-          <button
-            className={`text-2xl font-header uppercase tracking-widest ${currentView === 'about' ? 'text-neon-green' : 'text-white'}`}
-            onClick={() => handleNavigate('about')}
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={`text-2xl font-header uppercase tracking-widest ${isActive('/about') ? 'text-neon-green' : 'text-white'}`}
+            onClick={closeMobileMenu}
           >
             About
-          </button>
-          <button
-            className={`text-2xl font-header uppercase tracking-widest ${currentView === 'pricing' ? 'text-neon-green' : 'text-white'}`}
-            onClick={() => handleNavigate('pricing')}
+          </NavLink>
+          <NavLink
+            to="/pricing"
+            className={`text-2xl font-header uppercase tracking-widest ${isActive('/pricing') ? 'text-neon-green' : 'text-white'}`}
+            onClick={closeMobileMenu}
           >
             Pricing
-          </button>
+          </NavLink>
           <div className="w-12 h-[1px] bg-white/20 my-2"></div>
-          <button
-            className={`text-xl font-mono uppercase tracking-widest ${currentView === 'login' ? 'text-neon-green' : 'text-white'}`}
-            onClick={() => handleNavigate('login')}
+          <NavLink
+            to="/login"
+            className={`text-xl font-mono uppercase tracking-widest ${isActive('/login') ? 'text-neon-green' : 'text-white'}`}
+            onClick={closeMobileMenu}
           >
             Login
-          </button>
-          <button
-            onClick={() => handleNavigate('signup')}
+          </NavLink>
+          <NavLink
+            to="/signup"
             className="neon-btn text-lg px-8 py-3"
+            onClick={closeMobileMenu}
           >
             Sign Up
-          </button>
+          </NavLink>
         </div>
       )}
     </>

@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface NotFoundProps {
     onNavigate: (view: 'home') => void;
 }
 
-const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
+const NotFound: React.FC = () => {
+    const navigate = useNavigate();
     return (
         <div className="relative flex items-center justify-center h-screen w-screen overflow-hidden">
             <div className="absolute inset-0 circuit-bg z-0"></div>
@@ -30,10 +32,10 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
                         <h1 className="text-4xl md:text-6xl font-header font-black uppercase tracking-tighter">THE LOGIC HAS<br /><span className="text-neon-magenta">DECONSTRUCTED</span></h1>
                     </div>
                     <button
-                        onClick={() => onNavigate('home')}
-                        className="group neon-btn"
+                        onClick={() => navigate('/')}
+                        className="neon-btn text-lg px-8 py-4"
                     >
-                        RETURN TO WHISTLE_OS
+                        Return_To_Base
                     </button>
                     <div className="mt-8 flex gap-12 font-mono text-[9px] text-white/30 tracking-widest uppercase">
                         <div className="flex flex-col gap-1">

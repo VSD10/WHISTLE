@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../src/context/AuthContext';
 import { api } from '../src/services/api';
 import { HistoryItem, SystemMetrics } from '../src/types/api';
 
@@ -17,6 +19,9 @@ const ChatInterface: React.FC = () => {
     const [metrics, setMetrics] = useState<SystemMetrics | null>(null);
     const [temp, setTemp] = useState(0.7);
     const [topP, setTopP] = useState(0.9);
+
+    const navigate = useNavigate();
+    const { user, signOut } = useAuth();
 
     useEffect(() => {
         const loadData = async () => {
@@ -113,6 +118,15 @@ const ChatInterface: React.FC = () => {
         }
     };
 
+    const handleLogout = async () => {
+        try {
+            await signOut();
+            navigate('/login');
+        } catch (e) {
+            console.error('Logout error:', e);
+        }
+    };
+
     return (
         <div className="flex flex-col h-screen overflow-hidden bg-deep-black text-white font-mono selection:bg-neon-green selection:text-black uppercase relative">
             <div className="absolute inset-0 scanlines z-[200] pointer-events-none opacity-40"></div>
@@ -175,18 +189,29 @@ const ChatInterface: React.FC = () => {
                                         <h3 className="text-neon-green text-sm font-bold tracking-widest mb-4 border-b border-white/10 pb-2">USER_PROFILE</h3>
                                         <div className="grid gap-4">
                                             <div className="bg-white/5 p-4 border border-white/10">
-                                                <label className="block text-[10px] text-white/40 mb-1">OPERATOR_ID</label>
-                                                <div className="font-mono text-white">OP_882A_X</div>
+                                                <label className="block text-[10px] text-white/40 mb-1">OPERATOR_NAME</label>
+                                                <div className="font-mono text-white">{user?.user_metadata?.name || user?.email?.split('@')[0] || 'UNKNOWN'}</div>
                                             </div>
                                             <div className="bg-white/5 p-4 border border-white/10">
                                                 <label className="block text-[10px] text-white/40 mb-1">EMAIL_UPLINK</label>
-                                                <div className="font-mono text-white">OPERATOR@WHISTLE.SYS</div>
+                                                <div className="font-mono text-white">{user?.email || 'NOT_CONNECTED'}</div>
+                                            </div>
+                                            <div className="bg-white/5 p-4 border border-white/10">
+                                                <label className="block text-[10px] text-white/40 mb-1">USER_ID</label>
+                                                <div className="font-mono text-white text-xs">{user?.id?.substring(0, 16) || 'N/A'}...</div>
+                                            </div>
+                                            <div className="bg-white/5 p-4 border border-white/10">
+                                                <label className="block text-[10px] text-white/40 mb-1">AUTH_PROVIDER</label>
+                                                <div className="font-mono text-white uppercase">{user?.app_metadata?.provider || 'EMAIL'}</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div>
                                         <h3 className="text-neon-green text-sm font-bold tracking-widest mb-4 border-b border-white/10 pb-2">SECURITY</h3>
-                                        <button className="border border-red-500/50 text-red-500 px-6 py-2 text-xs font-bold tracking-widest hover:bg-red-500/10 transition-all">
+                                        <button
+                                            onClick={handleLogout}
+                                            className="border border-red-500/50 text-red-500 px-6 py-2 text-xs font-bold tracking-widest hover:bg-red-500/10 transition-all"
+                                        >
                                             TERMINATE_SESSION
                                         </button>
                                     </div>
@@ -342,10 +367,14 @@ const ChatInterface: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-between px-4 py-1.5 bg-data-gray/90 backdrop-blur-md border-b border-white/5">
                     <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => navigate('/')}
+                            className="flex items-center gap-2 hover:opacity-80 transition-opacity cursor-pointer"
+                            title="Back to Home"
+                        >
                             <h1 className="text-[12px] font-header font-black tracking-tighter text-neon-green leading-none">WHISTLE</h1>
                             <span className="text-[8px] tracking-[0.2em] text-white/40 border-l border-white/10 pl-2">SYSTEM_CONSOLE</span>
-                        </div>
+                        </button>
                         <div className="flex gap-1">
                             <div className="group relative">
                                 <div className="status-indicator">

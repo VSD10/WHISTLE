@@ -1,10 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-interface FooterProps {
-  onNavigate: (view: 'home' | 'about' | 'pricing' | 'login' | 'signup' | '404') => void;
-}
-
-const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+const Footer: React.FC = () => {
   return (
     <footer className="bg-deep-black border-t border-white/10 pt-32 pb-12">
       <div className="container mx-auto px-6">
@@ -24,13 +21,13 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               DECONSTRUCTING THE MONOLITH. A final year project dedicated to multi-agent AI verification using consensus logic and weighted hybrid intelligence.
             </p>
             <div className="flex gap-4">
-              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" onClick={() => onNavigate('404')}>
+              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors">
                 <span className="material-symbols-outlined text-sm">terminal</span>
               </button>
-              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" onClick={() => onNavigate('404')}>
+              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors">
                 <span className="material-symbols-outlined text-sm">data_object</span>
               </button>
-              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors" onClick={() => onNavigate('404')}>
+              <button className="w-10 h-10 border border-white/10 flex items-center justify-center hover:border-neon-green hover:text-neon-green transition-colors">
                 <span className="material-symbols-outlined text-sm">hub</span>
               </button>
             </div>
@@ -41,17 +38,17 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div>
               <h4 className="text-[10px] text-neon-green font-mono uppercase mb-6 tracking-widest underline underline-offset-8">Navigation</h4>
               <ul className="text-[10px] font-mono space-y-4 text-white/50 uppercase">
-                <li><a className="hover:text-white transition-colors" href="/">Home</a></li>
-                <li><a className="hover:text-white transition-colors" href="/about">About</a></li>
-                <li><a className="hover:text-white transition-colors" href="/pricing">Pricing</a></li>
+                <li><Link className="hover:text-white transition-colors" to="/">Home</Link></li>
+                <li><Link className="hover:text-white transition-colors" to="/about">About</Link></li>
+                <li><Link className="hover:text-white transition-colors" to="/pricing">Pricing</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-[10px] text-neon-magenta font-mono uppercase mb-6 tracking-widest underline underline-offset-8">Project_Team</h4>
               <ul className="text-[10px] font-mono space-y-4 text-white/50 uppercase">
-                <li><button className="hover:text-white transition-colors" onClick={() => onNavigate('404')}>Lead_Dev_Alpha</button></li>
-                <li><button className="hover:text-white transition-colors" onClick={() => onNavigate('404')}>Logic_Architect</button></li>
-                <li><button className="hover:text-white transition-colors" onClick={() => onNavigate('404')}>Data_Engineer</button></li>
+                <li><button className="hover:text-white transition-colors">Lead_Dev_Alpha</button></li>
+                <li><button className="hover:text-white transition-colors">Logic_Architect</button></li>
+                <li><button className="hover:text-white transition-colors">Data_Engineer</button></li>
               </ul>
             </div>
             <div className="col-span-2 md:col-span-1">

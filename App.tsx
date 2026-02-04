@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './src/context/AuthContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProblemSection from './components/ProblemSection';
@@ -13,12 +15,42 @@ import About from './components/About';
 import Pricing from './components/Pricing';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
 import ChatInterface from './components/ChatInterface';
 import NotFound from './components/NotFound';
+import LoadingScreen from './components/LoadingScreen';
+
+// Home page component
+const HomePage: React.FC<{ onJoinWaitlist: () => void }> = ({ onJoinWaitlist }) => (
+  <>
+    <Hero onJoinWaitlist={onJoinWaitlist} />
+    <ProblemSection />
+    <HowItWorks />
+    <SystemWorkflow />
+    <Features />
+    <Benchmarks />
+    <Domains />
+  </>
+);
+
+// Protected Route Component
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <>{children}</>;
+};
 
 const App: React.FC = () => {
-  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'about' | 'pricing' | 'login' | 'signup' | 'chat' | '404'>('home');
+  const [isWaitlistOpen, setIsWaitlistOpen] = React.useState(false);
 
   const handleOpenWaitlist = () => {
     setIsWaitlistOpen(true);
@@ -28,44 +60,63 @@ const App: React.FC = () => {
     setIsWaitlistOpen(false);
   };
 
-  const navigateTo = (view: 'home' | 'about' | 'pricing' | 'login' | 'signup' | 'chat' | '404') => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setCurrentView(view);
-  };
-
   return (
-    <div className="bg-deep-black text-white selection:bg-neon-magenta selection:text-white min-h-screen flex flex-col overflow-x-hidden">
-      {currentView !== 'chat' && currentView !== '404' && (
-        <Header
-          onJoinWaitlist={handleOpenWaitlist}
-          onNavigate={navigateTo}
-          currentView={currentView}
-        />
-      )}
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="bg-deep-black text-white selection:bg-neon-magenta selection:text-white min-h-screen flex flex-col overflow-x-hidden">
+          <Routes>
+            {/* Routes with Header and Footer */}
+            <Route path="/" element={
+              <>
+                <Header onJoinWaitlist={handleOpenWaitlist} />
+                <main className="flex-grow">
+                  <HomePage onJoinWaitlist={handleOpenWaitlist} />
+                </main>
+                <Footer />
+              </>
+            } />
 
-      <main className="flex-grow">
-        {currentView === 'home' && (
-          <>
-            <Hero onJoinWaitlist={handleOpenWaitlist} />
-            <ProblemSection />
-            <HowItWorks />
-            <SystemWorkflow />
-            <Features />
-            <Benchmarks />
-            <Domains />
-          </>
-        )}
-        {currentView === 'about' && <About />}
-        {currentView === 'pricing' && <Pricing onJoinWaitlist={handleOpenWaitlist} />}
-        {currentView === 'login' && <Login onNavigate={navigateTo} />}
-        {currentView === 'signup' && <Signup onNavigate={navigateTo} />}
-        {currentView === 'chat' && <ChatInterface />}
-        {currentView === '404' && <NotFound onNavigate={navigateTo} />}
-      </main>
+            <Route path="/about" element={
+              <>
+                <Header onJoinWaitlist={handleOpenWaitlist} />
+                <main className="flex-grow">
+                  <About />
+                </main>
+                <Footer />
+              </>
+            } />
 
-      {currentView !== 'chat' && currentView !== '404' && <Footer onNavigate={navigateTo} />}
-      <WaitlistModal isOpen={isWaitlistOpen} onClose={handleCloseWaitlist} />
-    </div>
+            <Route path="/pricing" element={
+              <>
+                <Header onJoinWaitlist={handleOpenWaitlist} />
+                <main className="flex-grow">
+                  <Pricing onJoinWaitlist={handleOpenWaitlist} />
+                </main>
+                <Footer />
+              </>
+            } />
+
+            {/* Auth routes without Header/Footer */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+
+            {/* Protected chat route */}
+            <Route path="/chat" element={
+              <ProtectedRoute>
+                <ChatInterface />
+              </ProtectedRoute>
+            } />
+
+            {/* 404 route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+
+          <WaitlistModal isOpen={isWaitlistOpen} onClose={handleCloseWaitlist} />
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
