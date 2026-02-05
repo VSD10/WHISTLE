@@ -7,6 +7,7 @@ import {
     verificationService,
     waitlistService,
     metricsService,
+    apiKeyService,
 } from './database';
 
 // Toggle this to switch between simulation and real database
@@ -88,6 +89,32 @@ class ApiService {
             }
         },
 
+
+        getSettings: async (): Promise<UserSettings> => {
+            if (SIMULATION_MODE) {
+                await new Promise((resolve) => setTimeout(resolve, 400));
+                return {
+                    temperature: 0.7,
+                    top_p: 0.9,
+                    model: 'GPT-4_TURBO',
+                };
+            }
+
+            try {
+                const { data: { user: currentUser } } = await import('../config/supabaseClient').then(m => m.supabase.auth.getUser());
+                if (!currentUser) throw new Error('Not authenticated');
+
+                const settings = await settingsService.getSettings(currentUser.id);
+                return {
+                    temperature: settings.temperature,
+                    top_p: settings.top_p,
+                    model: settings.preferred_model || 'GPT-4_TURBO',
+                };
+            } catch (error: any) {
+                throw new Error(error.message || 'Failed to get settings');
+            }
+        },
+
         updateSettings: async (settings: UserSettings): Promise<{ success: boolean }> => {
             if (SIMULATION_MODE) {
                 await new Promise((resolve) => setTimeout(resolve, 600));
@@ -107,6 +134,42 @@ class ApiService {
     };
 
     subscription = {
+        getCurrent: async (): Promise<{ subscription: any; plan: any }> => {
+            if (SIMULATION_MODE) {
+                await new Promise((resolve) => setTimeout(resolve, 600));
+                return {
+                    subscription: {
+                        id: '1',
+                        user_id: 'mock-user',
+                        plan_id: 'free',
+                        status: 'active',
+                        queries_used_this_period: 5,
+                    },
+                    plan: {
+                        id: '1',
+                        plan_id: 'free',
+                        name: 'Free',
+                        description: 'Basic verification for students and casual researchers.',
+                        price_monthly: 0,
+                        queries_per_month: 50,
+                        max_agents: 3,
+                        priority_support: false,
+                        api_access: false,
+                    },
+                };
+            }
+
+            try {
+                const { data: { user: currentUser } } = await import('../config/supabaseClient').then(m => m.supabase.auth.getUser());
+                if (!currentUser) throw new Error('Not authenticated');
+
+                const subscription = await subscriptionService.getUserSubscription(currentUser.id);
+                return subscription;
+            } catch (error: any) {
+                throw new Error(error.message || 'Failed to get subscription');
+            }
+        },
+
         update: async (planId: string): Promise<{ success: boolean; message: string }> => {
             if (SIMULATION_MODE) {
                 await new Promise((resolve) => setTimeout(resolve, 800));
@@ -190,6 +253,111 @@ class ApiService {
             } catch (error: any) {
                 // Return default metrics if fetch fails
                 return MOCK_METRICS;
+            }
+        },
+    };
+
+    models = {
+        save: async (provider: 'openai' | 'anthropic' | 'google' | 'meta' | 'custom', modelName: string, apiKey: string): Promise<{ success: boolean }> => {
+            if (SIMULATION_MODE) {
+                await new Promise((resolve) => setTimeout(resolve, 500));
+                return { success: true };
+            }
+
+            try {
+                const { data: { user: currentUser } } = await import('../config/supabaseClient').then(m => m.supabase.auth.getUser());
+                if (!currentUser) throw new Error('Not authenticated');
+
+                await apiKeyService.saveApiKey(currentUser.id, provider, modelName, apiKey);
+                return { success: true };
+            } catch (error: any) {
+                throw new Error(error.message || 'Failed to save API key');
+            }
+        },
+
+        getAll: async (): Promise<any[]> => {
+            if (SIMULATION_MODE) {
+                return [
+                    { id: '1', provider: 'openai', model_name: 'gpt-4', is_active: true, created_at: new Date().toISOString() },
+                ];
+            }
+
+            try {
+                const { data: { user: currentUser } } = await import('../config/supabaseClient').then(m => m.supabase.auth.getUser());
+                if (!currentUser) throw new Error('Not authenticated');
+
+                const keys = await apiKeyService.getApiKeys(currentUser.id);
+                return keys;
+            } catch (error: any) {
+                throw new Error(error.message || 'Failed to get API keys');
+            }
+        },
+
+        delete: async (keyId: string): Promise<{ success: boolean }> => {
+            if (SIMULATION_MODE) {
+                await new Promise((resolve) => setTimeout(resolve, 300));
+                return { success: true };
+            }
+
+            try {
+                const { data: { user: currentUser } } = await import('../config/supabaseClient').then(m => m.supabase.auth.getUser());
+                if (!currentUser) throw new Error('Not authenticated');
+
+                await apiKeyService.deleteApiKey(currentUser.id, keyId);
+                return { success: true };
+            } catch (error: any) {
+                throw new Error(error.message || 'Failed to delete API key');
+            }
+        },
+
+        toggle: async (keyId: string, isActive: boolean): Promise<{ success: boolean }> => {
+            if (SIMULATION_MODE) {
+                await new Promise((resolve) => setTimeout(resolve, 300));
+                return { success: true };
+            }
+
+            try {
+                const { data: { user: currentUser } } = await import('../config/supabaseClient').then(m => m.supabase.auth.getUser());
+                if (!currentUser) throw new Error('Not authenticated');
+
+                await apiKeyService.toggleApiKey(currentUser.id, keyId, isActive);
+                return { success: true };
+            } catch (error: any) {
+                throw new Error(error.message || 'Failed to toggle API key');
+            }
+        },
+
+        update: async (keyId: string, modelName?: string, apiKey?: string): Promise<{ success: boolean }> => {
+            if (SIMULATION_MODE) {
+                await new Promise((resolve) => setTimeout(resolve, 500));
+                return { success: true };
+            }
+
+            try {
+                const { data: { user: currentUser } } = await import('../config/supabaseClient').then(m => m.supabase.auth.getUser());
+                if (!currentUser) throw new Error('Not authenticated');
+
+                await apiKeyService.updateApiKey(currentUser.id, keyId, modelName, apiKey);
+                return { success: true };
+            } catch (error: any) {
+                throw new Error(error.message || 'Failed to update API key');
+            }
+        },
+
+        select: async (modelName: string): Promise<{ success: boolean }> => {
+            if (SIMULATION_MODE) {
+                await new Promise((resolve) => setTimeout(resolve, 300));
+                return { success: true };
+            }
+
+            try {
+                const { data: { user: currentUser } } = await import('../config/supabaseClient').then(m => m.supabase.auth.getUser());
+                if (!currentUser) throw new Error('Not authenticated');
+
+                await apiKeyService.setPreferredModel(currentUser.id, modelName);
+                return { success: true };
+            } catch (error: any) {
+                throw new Error(error.message || 'Failed to select model');
             }
         },
     };

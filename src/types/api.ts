@@ -47,6 +47,7 @@ export interface UserSettings {
     temperature: number;
     top_p: number;
     model: string;
+    preferred_model?: string;
 }
 
 export interface UpdateProfileData {

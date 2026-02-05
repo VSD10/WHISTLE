@@ -546,3 +546,216 @@ export const auditService = {
         return data;
     },
 };
+
+// =====================================================
+// API KEY OPERATIONS
+// =====================================================
+
+// Encryption key - should be stored in environment variable
+const ENCRYPTION_KEY = import.meta.env.VITE_ENCRYPTION_KEY || 'whistle-default-encryption-key-change-in-production';
+
+export const apiKeyService = {
+    /**
+     * Save a new API key for a user
+     */
+    async saveApiKey(
+        userId: string,
+        provider: 'openai' | 'anthropic' | 'google' | 'meta' | 'custom',
+        modelName: string,
+        apiKey: string
+    ) {
+        // Encrypt the API key before storing
+        const { data: encryptedData, error: encryptError } = await supabase
+            .rpc('encrypt_api_key', {
+                api_key: apiKey,
+                encryption_key: ENCRYPTION_KEY
+            });
+
+        if (encryptError) throw encryptError;
+
+        const { data, error } = await supabase
+            .from('user_api_keys')
+            .insert({
+                user_id: userId,
+                provider,
+                model_name: modelName,
+                api_key_encrypted: encryptedData,
+                is_active: true,
+            })
+            .select()
+            .single();
+
+        if (error) throw error;
+        return data;
+    },
+
+    /**
+     * Get all API keys for a user (without decryption)
+     */
+    async getApiKeys(userId: string) {
+        const { data, error } = await supabase
+            .from('user_api_keys')
+            .select('id, provider, model_name, is_active, created_at, last_used_at')
+            .eq('user_id', userId)
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        return data;
+    },
+
+    /**
+     * Get active API keys for a user
+     */
+    async getActiveApiKeys(userId: string) {
+        const { data, error } = await supabase
+            .from('user_api_keys')
+            .select('id, provider, model_name, is_active, created_at')
+            .eq('user_id', userId)
+            .eq('is_active', true)
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        return data;
+    },
+
+    /**
+     * Delete an API key
+     */
+    async deleteApiKey(userId: string, keyId: string) {
+        const { error } = await supabase
+            .from('user_api_keys')
+            .delete()
+            .eq('id', keyId)
+            .eq('user_id', userId); // Ensure user owns the key
+
+        if (error) throw error;
+    },
+
+    /**
+     * Toggle API key active status
+     */
+    async toggleApiKey(userId: string, keyId: string, isActive: boolean) {
+        const { data, error } = await supabase
+            .from('user_api_keys')
+            .update({ is_active: isActive })
+            .eq('id', keyId)
+            .eq('user_id', userId)
+            .select()
+            .single();
+
+        if (error) throw error;
+        return data;
+    },
+
+    /**
+     * Update last used timestamp
+     */
+    async updateLastUsed(keyId: string) {
+        const { error } = await supabase
+            .from('user_api_keys')
+            .update({ last_used_at: new Date().toISOString() })
+            .eq('id', keyId);
+
+        if (error) throw error;
+    },
+
+    /**
+     * Get decrypted API key (server-side only - for actual API calls)
+     * Note: This should ideally be done on the backend, not exposed to frontend
+     */
+    async getDecryptedApiKey(userId: string, keyId: string): Promise<string | null> {
+        const { data, error } = await supabase
+            .from('user_api_keys')
+            .select('api_key_encrypted')
+            .eq('id', keyId)
+            .eq('user_id', userId)
+            .eq('is_active', true)
+            .single();
+
+        if (error) throw error;
+        if (!data) return null;
+
+        // Decrypt the API key
+        const { data: decryptedKey, error: decryptError } = await supabase
+            .rpc('decrypt_api_key', {
+                encrypted_key: data.api_key_encrypted,
+                encryption_key: ENCRYPTION_KEY
+            });
+
+        if (decryptError) throw decryptError;
+        return decryptedKey;
+    },
+
+    /**
+     * Update API key details
+     */
+    async updateApiKey(
+        userId: string,
+        keyId: string,
+        modelName?: string,
+        apiKey?: string
+    ) {
+        const updates: any = { updated_at: new Date().toISOString() };
+
+        if (modelName) updates.model_name = modelName;
+
+        if (apiKey) {
+            // Encrypt new key
+            const { data: encryptedData, error: encryptError } = await supabase
+                .rpc('encrypt_api_key', {
+                    api_key: apiKey,
+                    encryption_key: ENCRYPTION_KEY
+                });
+
+            if (encryptError) throw encryptError;
+            updates.api_key_encrypted = encryptedData;
+        }
+
+        const { data, error } = await supabase
+            .from('user_api_keys')
+            .update(updates)
+            .eq('id', keyId)
+            .eq('user_id', userId)
+            .select()
+            .single();
+
+        if (error) throw error;
+        return data;
+    },
+
+    /**
+     * Set preferred model
+     */
+    async setPreferredModel(userId: string, modelName: string) {
+        // First check if user_settings entry exists
+        const { data: existingSettings } = await supabase
+            .from('user_settings')
+            .select('id')
+            .eq('user_id', userId)
+            .single();
+
+        let error;
+        if (!existingSettings) {
+            // Create settings if not exist
+            const { error: insertError } = await supabase
+                .from('user_settings')
+                .insert({
+                    user_id: userId,
+                    preferred_model: modelName,
+                    theme: 'dark',
+                    notifications: true
+                });
+            error = insertError;
+        } else {
+            // Update existing
+            const { error: updateError } = await supabase
+                .from('user_settings')
+                .update({ preferred_model: modelName, updated_at: new Date().toISOString() })
+                .eq('user_id', userId);
+            error = updateError;
+        }
+
+        if (error) throw error;
+        return { success: true };
+    },
+};

@@ -6,6 +6,30 @@ const Changelog: React.FC = () => {
 
     const logs = [
         {
+            version: 'v2.2.0',
+            date: '2026.02.05',
+            title: 'CUSTOM_MODEL_ARCHITECTURE',
+            changes: [
+                'Deployed Secure Custom Model Management System (BYOK)',
+                'Implemented Server-Side AES Encryption for API Credentials',
+                'Integrated Model Selection & Preference Persistence Logic',
+                'Added Granular Edit/Delete Capabilities for User Models',
+                'Enhanced UI Components with Neon-Themed Dropdowns & Animations'
+            ]
+        },
+        {
+            version: 'v2.1.5',
+            date: '2026.02.05',
+            title: 'DATABASE_ARCHITECTURE_&_WORKFLOW',
+            changes: [
+                'Designed Comprehensive Supabase Schema',
+                'Implemented RLS Policies & Security Triggers',
+                'Established Multi-Agent Workflow Validation',
+                'Integrated Real-time Database with Frontend',
+                'Migrated from Simulation Mode to Production Database'
+            ]
+        },
+        {
             version: 'v2.1.0',
             date: '2026.02.04',
             title: 'USER_PROFILE_ENHANCEMENT',
