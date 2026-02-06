@@ -1,3 +1,4 @@
+# ![WHISTLE Logo](supabase/functions/send-onboarding-email/WHISTLE%20(1).png)
 # WHISTLE // AI VERIFICATION SYSTEM
 ### Multi-Agent Consensus for Trustworthy AI Outputs
 
@@ -106,6 +107,9 @@ WHISTLE/
 ---
 
 ## GETTING STARTED
+
+### Documentation
+For detailed setup guides, troubleshooting, and deployment instructions, please verify the **[Setup Documentation](./setup/README.md)**.
 
 ### Prerequisites
 -   Node.js (v18 or later)
