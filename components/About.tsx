@@ -114,8 +114,14 @@ const About: React.FC = () => {
       {/* Team Section - Dossier Style */}
       <section className="py-40 bg-deep-black overflow-hidden relative">
         <div className="container mx-auto px-6 relative z-10">
-          <div className="mb-16">
-            <h2 className="text-5xl md:text-7xl font-header font-black uppercase tracking-tighter text-WHITE  ">DEVELOPERS</h2>
+          <div className="mb-16 flex items-end justify-between border-b border-white/10 pb-6">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-header font-black uppercase tracking-tighter text-white mb-2">PROJECT_AUTHORS</h2>
+              <p className="text-xs text-white/40 uppercase tracking-widest font-mono">CORE ARCHITECTS & DEVELOPERS</p>
+            </div>
+            <div className="text-right">
+              <p className="text-xs text-neon-green uppercase tracking-widest font-mono">ACTIVE_SQUAD: 04 // NODES_SYNCED</p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto">
