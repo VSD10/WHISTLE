@@ -111,92 +111,180 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* Team Section - Dossier Style */}
       <section className="py-40 bg-deep-black overflow-hidden relative">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
-            <div>
-              <h2 className="text-5xl font-header font-black uppercase tracking-tighter">PROJECT_AUTHORS</h2>
-              <p className="text-xs text-white/40 font-mono mt-2 uppercase tracking-[0.2em]">CORE ARCHITECTS & DEVELOPERS</p>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="mb-16">
+            <h2 className="text-5xl md:text-7xl font-header font-black uppercase tracking-tighter text-WHITE  ">DEVELOPERS</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            {/* POI_01: Dharshan */}
+            <div className="border-l-2 border-neon-magenta/40 bg-data-gray/30 backdrop-blur-sm mb-8 relative transition-all duration-500 hover:border-l-neon-magenta hover:scale-110 hover:z-30 group peer peer-hover:blur-sm peer-hover:opacity-50">
+
+              <div className="flex border-b border-white/10">
+                <div className="px-4 py-2 text-[10px] font-bold border-r border-white/10 uppercase tracking-tighter bg-neon-magenta text-black">POI_01</div>
+                <div className="px-4 py-2 text-[10px] font-bold border-r border-white/10 uppercase tracking-tighter">STATUS: ACTIVE</div>
+                <div className="flex-1"></div>
+                <div className="p-2 flex items-center">
+                  <span className="text-xs text-neon-green">●</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-12 gap-0">
+                <div className="col-span-4 border-r border-white/10 p-2">
+                  <div className="w-full aspect-square bg-white/5 relative overflow-hidden flex items-center justify-center" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
+                    <img src="/DHARSHAN.png" alt="Dharshan" className="w-full h-full object-cover" />
+                    <div className="absolute bottom-2 left-2 text-[8px] bg-black/60 px-1 font-bold text-neon-green">LIVE_FEED</div>
+                    <div className="absolute top-2 right-2 flex gap-1">
+                      <div className="w-1 h-1 bg-red-500 rounded-full animate-pulse"></div>
+                    </div>
+                  </div>
+                  <div className="mt-2 text-[8px] text-white/30 font-mono">COORD: 34.0522 N // 118.2437 W</div>
+                </div>
+                <div className="col-span-8 p-6 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Known Aliases</span>
+                    <span className="text-sm text-white/90 uppercase mb-4 block font-header text-2xl">DHARSHAN V S</span>
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Operational Focus</span>
+                    <span className="text-sm text-white/90 uppercase mb-4 block text-neon-green font-bold">LEAD DEVELOPER</span>
+                  </div>
+                  <div className="bg-black/40 p-3 border border-white/5">
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Intel Logs</span>
+                    <p className="text-[9px] text-white/50 leading-loose">
+                      &gt;&gt; SYSTEM_ORCHESTRATION_LOADED<br />
+                      &gt;&gt; CONSENSUS_LOGIC_V4_COMPILED<br />
+                      &gt;&gt; WEIGHTED_BIAS_TUNING_COMPLETE
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="font-mono text-[10px] text-neon-green border border-neon-green/20 px-4 py-1">
-              ACTIVE_SQUAD: 04 // NODES_SYNCED
+
+            {/* POI_02: Priyadharshan */}
+            <div className="border-l-2 border-neon-green/40 bg-data-gray/30 backdrop-blur-sm mb-8 relative transition-all duration-500 hover:border-l-neon-green hover:scale-110 hover:z-30 group peer peer-hover:blur-sm peer-hover:opacity-50">
+
+              <div className="flex border-b border-white/10">
+                <div className="px-4 py-2 text-[10px] font-bold border-r border-white/10 uppercase tracking-tighter bg-neon-green text-black">POI_02</div>
+                <div className="px-4 py-2 text-[10px] font-bold border-r border-white/10 uppercase tracking-tighter">STATUS: SYNCED</div>
+                <div className="flex-1"></div>
+                <div className="p-2 flex items-center">
+                  <span className="text-xs text-neon-green">◉</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-12 gap-0">
+                <div className="col-span-4 border-r border-white/10 p-2">
+                  <div className="w-full aspect-square bg-white/5 relative overflow-hidden flex items-center justify-center" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
+                    <img src="/PRIYADHARSHAN .jpg" alt="Priyadharshan" className="w-full h-full object-cover" />
+                    <div className="absolute bottom-2 left-2 text-[8px] bg-black/60 px-1 font-bold text-neon-green">SECURE_LINK</div>
+                  </div>
+                  <div className="mt-2 text-[8px] text-white/30 font-mono">COORD: 51.5074 N // 0.1278 W</div>
+                </div>
+                <div className="col-span-8 p-6 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Known Aliases</span>
+                    <span className="text-sm text-white/90 uppercase mb-4 block font-header text-2xl">PRIYADHARSHAN D S</span>
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Operational Focus</span>
+                    <span className="text-sm text-white/90 uppercase mb-4 block text-neon-green font-bold">LOGIC ARCHITECT</span>
+                  </div>
+                  <div className="bg-black/40 p-3 border border-white/5">
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Intel Logs</span>
+                    <p className="text-[9px] text-white/50 leading-loose">
+                      &gt;&gt; TRUTH_ANCHOR_PROTOCOLS_ENGAGED<br />
+                      &gt;&gt; HALLUCINATION_DETECTION_ACTIVE<br />
+                      &gt;&gt; SYMBOLIC_REASONING_ENGINE_STABLE
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* POI_03: Bathrinath */}
+            <div className="border-l-2 border-neon-magenta/40 bg-data-gray/30 backdrop-blur-sm mb-8 relative transition-all duration-500 hover:border-l-neon-magenta hover:scale-110 hover:z-30 group peer peer-hover:blur-sm peer-hover:opacity-50">
+
+              <div className="flex border-b border-white/10">
+                <div className="px-4 py-2 text-[10px] font-bold border-r border-white/10 uppercase tracking-tighter bg-neon-magenta text-black">POI_03</div>
+                <div className="px-4 py-2 text-[10px] font-bold border-r border-white/10 uppercase tracking-tighter">STATUS: STREAMING</div>
+                <div className="flex-1"></div>
+                <div className="p-2 flex items-center">
+                  <span className="text-xs text-neon-magenta animate-pulse">◈</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-12 gap-0">
+                <div className="col-span-4 border-r border-white/10 p-2">
+                  <div className="w-full aspect-square bg-white/5 relative overflow-hidden flex items-center justify-center" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
+                    <img src="/BATHRINATH.jpg" alt="Bathrinath" className="w-full h-full object-cover" />
+                    <div className="absolute bottom-2 left-2 text-[8px] bg-black/60 px-1 font-bold text-neon-green">BUFFERING...</div>
+                  </div>
+                  <div className="mt-2 text-[8px] text-white/30 font-mono">COORD: 35.6762 N // 139.6503 E</div>
+                </div>
+                <div className="col-span-8 p-6 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Known Aliases</span>
+                    <span className="text-sm text-white/90 uppercase mb-4 block font-header text-2xl">BATHRINATH K</span>
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Operational Focus</span>
+                    <span className="text-sm text-white/90 uppercase mb-4 block text-neon-green font-bold">DATA ENGINEER</span>
+                  </div>
+                  <div className="bg-black/40 p-3 border border-white/5">
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Intel Logs</span>
+                    <p className="text-[9px] text-white/50 leading-loose">
+                      &gt;&gt; DATA_STREAM_VISUALS_OPTIMIZED<br />
+                      &gt;&gt; REACTIVE_SCHEMATICS_RENDERED<br />
+                      &gt;&gt; NEON_UI_THRESHOLD_MET
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* POI_04: Vasudevan */}
+            <div className="border-l-2 border-neon-green/40 bg-data-gray/30 backdrop-blur-sm mb-8 relative transition-all duration-500 hover:border-l-neon-green hover:scale-110 hover:z-30 group peer peer-hover:blur-sm peer-hover:opacity-50">
+
+              <div className="flex border-b border-white/10">
+                <div className="px-4 py-2 text-[10px] font-bold border-r border-white/10 uppercase tracking-tighter bg-neon-green text-black">POI_04</div>
+                <div className="px-4 py-2 text-[10px] font-bold border-r border-white/10 uppercase tracking-tighter">STATUS: ENCRYPTED</div>
+                <div className="flex-1"></div>
+                <div className="p-2 flex items-center">
+                  <span className="text-xs text-neon-green">🔑</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-12 gap-0">
+                <div className="col-span-4 border-r border-white/10 p-2">
+                  <div className="w-full aspect-square bg-white/5 relative overflow-hidden flex items-center justify-center" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
+                    <img src="/VASUDEVAN.jpg" alt="Vasudevan" className="w-full h-full object-cover object-[center_30%]" />
+                    <div className="absolute bottom-2 left-2 text-[8px] bg-black/60 px-1 font-bold text-neon-green">DATA_LOCKED</div>
+                  </div>
+                  <div className="mt-2 text-[8px] text-white/30 font-mono">COORD: 40.7128 N // 74.0060 W</div>
+                </div>
+                <div className="col-span-8 p-6 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Known Aliases</span>
+                    <span className="text-sm text-white/90 uppercase mb-4 block font-header text-2xl">VASUDEVAN V</span>
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Operational Focus</span>
+                    <span className="text-sm text-white/90 uppercase mb-4 block text-neon-green font-bold">INTERFACE DESIGNER</span>
+                  </div>
+                  <div className="bg-black/40 p-3 border border-white/5">
+                    <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Intel Logs</span>
+                    <p className="text-[9px] text-white/50 leading-loose">
+                      &gt;&gt; WORKFLOW_ARCHITECTURE_STABLE<br />
+                      &gt;&gt; VECTOR_DB_SHARDING_SYNCED<br />
+                      &gt;&gt; LLM_MODEL_PIPELINE_FLOWING
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Member 1: Dharshan */}
-            <div className="bg-data-gray border border-white/5 group hover:border-neon-green/40 transition-all duration-300">
-              <div className="relative w-full h-80 bg-white/5 overflow-hidden">
-                <img src="/DHARHSAN.png" alt="Dharshan" className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green text-[8px] font-bold backdrop-blur-sm">
-                  <span className="status-dot"></span>
-                  ACTIVE
-                </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-2xl font-header uppercase mb-1">Dharshan</h4>
-                <p className="text-[10px] text-neon-green font-mono uppercase tracking-widest mb-4">Lead Developer</p>
-                <div className="space-y-2 text-[10px] font-mono text-white/60 border-t border-white/10 pt-4">
-                  <div className="flex justify-between"><span>UID:</span><span>#001_DHARSH</span></div>
-                  <div className="flex justify-between"><span>DEPT:</span><span>CORE_LOGIC</span></div>
-                </div>
-              </div>
-            </div>
 
-            {/* Member 2: Priyadharshan */}
-            <div className="bg-data-gray border border-white/5 group hover:border-neon-magenta/40 transition-all duration-300">
-              <div className="relative w-full h-80 bg-white/5 overflow-hidden">
-                <img src="/DHARHSAN.png" alt="Priyadharshan" className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green text-[8px] font-bold backdrop-blur-sm">
-                  <span className="status-dot"></span>
-                  ACTIVE
-                </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-2xl font-header uppercase mb-1">Priyadharshan</h4>
-                <p className="text-[10px] text-neon-magenta font-mono uppercase tracking-widest mb-4">Logic Architect</p>
-                <div className="space-y-2 text-[10px] font-mono text-white/60 border-t border-white/10 pt-4">
-                  <div className="flex justify-between"><span>UID:</span><span>#002_PRIYA</span></div>
-                  <div className="flex justify-between"><span>DEPT:</span><span>CONSENSUS_ENG</span></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Member 3: Bathrinath */}
-            <div className="bg-data-gray border border-white/5 group hover:border-neon-green/40 transition-all duration-300">
-              <div className="relative w-full h-80 bg-white/5 overflow-hidden">
-                <img src="/DHARHSAN.png" alt="Bathrinath" className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green text-[8px] font-bold backdrop-blur-sm">
-                  <span className="status-dot"></span>
-                  ACTIVE
-                </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-2xl font-header uppercase mb-1">Bathrinath</h4>
-                <p className="text-[10px] text-neon-green font-mono uppercase tracking-widest mb-4">Data Engineer</p>
-                <div className="space-y-2 text-[10px] font-mono text-white/60 border-t border-white/10 pt-4">
-                  <div className="flex justify-between"><span>UID:</span><span>#003_BATHRI</span></div>
-                  <div className="flex justify-between"><span>DEPT:</span><span>PIPELINE_DEV</span></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Member 4: Vasudevan */}
-            <div className="bg-data-gray border border-white/5 group hover:border-neon-magenta/40 transition-all duration-300">
-              <div className="relative w-full h-80 bg-white/5 overflow-hidden">
-                <img src="/DHARHSAN.png" alt="Vasudevan" className="w-full h-full object-cover object-[center_20%] group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-neon-green/10 text-neon-green text-[8px] font-bold backdrop-blur-sm">
-                  <span className="status-dot"></span>
-                  ACTIVE
-                </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-2xl font-header uppercase mb-1">Vasudevan</h4>
-                <p className="text-[10px] text-neon-magenta font-mono uppercase tracking-widest mb-4">Interface Designer</p>
-                <div className="space-y-2 text-[10px] font-mono text-white/60 border-t border-white/10 pt-4">
-                  <div className="flex justify-between"><span>UID:</span><span>#004_VASU</span></div>
-                  <div className="flex justify-between"><span>DEPT:</span><span>DECON_VISUAL</span></div>
-                </div>
+          <div className="mt-32 text-center">
+            <div className="inline-block border border-neon-magenta/30 p-8 bg-data-gray/50 max-w-2xl">
+              <h3 className="font-header text-xl mb-4 text-neon-magenta uppercase">Summary of Operations</h3>
+              <p className="text-xs text-white/50 font-mono uppercase leading-relaxed tracking-widest">
+                The aforementioned entities are responsible for the total deconstruction of monolithic AI frameworks. Current status of the WHISTLE_CORE remains: <span className="text-neon-green">ABSOLUTE_INTEGRITY</span>.
+              </p>
+              <div className="mt-6 flex justify-center gap-4">
+                <div className="w-12 h-1 bg-neon-magenta"></div>
+                <div className="w-12 h-1 bg-neon-green"></div>
+                <div className="w-12 h-1 bg-neon-magenta"></div>
               </div>
             </div>
           </div>
