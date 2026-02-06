@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="supabase/functions/send-onboarding-email/WHISTLE%20(1).png" alt="WHISTLE Logo" width="200"/>
+  <img src="supabase/functions/send-onboarding-email/WHISTLE%20(1).png" alt="WHISTLE Logo" width="800"/>
 </div>
 
 # WHISTLE // AI VERIFICATION SYSTEM
