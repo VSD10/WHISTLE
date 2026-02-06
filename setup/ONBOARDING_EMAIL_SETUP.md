@@ -12,7 +12,7 @@ Follow these commands in order to deploy the onboarding email system.
 ## Step 1: Navigate to Project Directory
 
 ```powershell
-cd "E:\CODESPACES\FINAL YEAR\WHISTLE"
+cd /path/to/project
 ```
 
 ---
@@ -61,7 +61,7 @@ This applies the webhook documentation migration.
 
 **You MUST do this step in the Supabase Dashboard:**
 
-1. Go to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/database/webhooks
+1. Go to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/database/webhooks
 2. Click **"Create a new hook"**
 3. Fill in these details:
 
@@ -72,7 +72,7 @@ This applies the webhook documentation migration.
    | **Events** | ✓ INSERT (check only this) |
    | **Type** | `HTTP Request` |
    | **Method** | `POST` |
-   | **URL** | `https://cdadbfkxivbaznhrsswn.supabase.co/functions/v1/send-onboarding-email` |
+   | **URL** | `https://[YOUR_PROJECT_ID].supabase.co/functions/v1/send-onboarding-email` |
 
 4. **HTTP Headers** - Add these two headers:
    ```

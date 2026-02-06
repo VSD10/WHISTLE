@@ -18,7 +18,7 @@ The Edge Function has been updated with:
 
 The webhook body needs to wrap data in a `record` object.
 
-**Go to**: [Database Webhooks](https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/database/webhooks)
+**Go to**: [Database Webhooks](https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/database/webhooks)
 
 **Edit your webhook** and update the **HTTP Params (Body)** to:
 
@@ -35,7 +35,7 @@ The webhook body needs to wrap data in a `record` object.
 ### Step 3: Test Again
 
 1. Insert a new test user via Table Editor
-2. Check Edge Function logs: [View Logs](https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/functions/send-onboarding-email/logs)
+2. Check Edge Function logs: [View Logs](https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/functions/send-onboarding-email/logs)
 3. Look for the "Received payload" log to see what data is being sent
 4. Verify email is extracted correctly
 
@@ -56,7 +56,7 @@ If you see "No email found in payload", the webhook body format needs adjustment
 
 You can test the function directly to verify it works:
 
-1. Go to: [Edge Functions](https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/functions/send-onboarding-email)
+1. Go to: [Edge Functions](https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/functions/send-onboarding-email)
 2. Click "Invoke function"
 3. Use this test payload:
 

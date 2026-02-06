@@ -16,7 +16,7 @@ Go to your Supabase project: https://supabase.com/dashboard
 ### 3. Copy the Migration
 Open this file and copy ALL contents:
 ```
-E:\CODESPACES\FINAL YEAR\WHISTLE\supabase\migrations\07_user_api_keys.sql
+supabase/migrations/07_user_api_keys.sql
 ```
 
 ### 4. Paste and Run

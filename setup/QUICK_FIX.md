@@ -15,7 +15,7 @@ Updated `06_sync_auth_users.sql` with:
 ## Execute This Now
 
 1. **Go to Supabase SQL Editor**
-   - https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/sql
+   - https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/sql
 
 2. **Copy and paste the ENTIRE contents** of:
    - `supabase/migrations/06_sync_auth_users.sql`

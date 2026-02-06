@@ -12,7 +12,7 @@ Supabase has a whitelist of allowed redirect URLs in the dashboard settings. You
 
 ### Step 1: Go to Supabase Auth Settings
 
-1. Open [Supabase Dashboard](https://supabase.com   /dashboard/project/cdadbfkxivbaznhrsswn)
+1. Open [Supabase Dashboard](https://supabase.com/dashboard/project/[YOUR_PROJECT_ID])
 2. Click **Authentication** in the left sidebar
 3. Click **URL Configuration**
 

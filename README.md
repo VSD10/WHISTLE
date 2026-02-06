@@ -1,4 +1,7 @@
-# ![WHISTLE Logo](supabase/functions/send-onboarding-email/WHISTLE%20(1).png)
+<div align="center">
+  <img src="supabase/functions/send-onboarding-email/WHISTLE%20(1).png" alt="WHISTLE Logo" width="200"/>
+</div>
+
 # WHISTLE // AI VERIFICATION SYSTEM
 ### Multi-Agent Consensus for Trustworthy AI Outputs
 

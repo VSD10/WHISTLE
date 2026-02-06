@@ -4,7 +4,7 @@
 
 ### 1. Execute SQL Files in Supabase
 
-1. Go to [Supabase SQL Editor](https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/sql)
+1. Go to [Supabase SQL Editor](https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/sql)
 2. Execute these files in order:
    - `supabase/migrations/01_create_tables.sql`
    - `supabase/migrations/02_create_indexes.sql`

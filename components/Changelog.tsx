@@ -6,6 +6,19 @@ const Changelog: React.FC = () => {
 
     const logs = [
         {
+            version: 'v2.3.0',
+            date: '2026.02.06',
+            title: 'ONBOARDING_SYSTEM_&_DOCUMENTATION',
+            changes: [
+                'Implemented automated onboarding email system via Supabase Edge Functions',
+                'Integrated Resend API for transactional emails',
+                'Designed \'Cyberpunk\' email template with hosted brand assets',
+                'Configured database webhooks for user provisioning',
+                'Reorganized project documentation into dedicated setup hub',
+                'Deployed system to production environment'
+            ]
+        },
+        {
             version: 'v2.2.0',
             date: '2026.02.05',
             title: 'CUSTOM_MODEL_ARCHITECTURE',

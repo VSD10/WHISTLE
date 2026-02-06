@@ -9,7 +9,7 @@ Since Supabase CLI is not installed, you can deploy the Edge Function directly t
 ### Step 1: Deploy Edge Function via Dashboard
 
 1. **Go to Supabase Dashboard**:
-   - Navigate to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/functions
+   - Navigate to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/functions
 
 2. **Create New Function**:
    - Click **"Create a new function"**
@@ -17,7 +17,7 @@ Since Supabase CLI is not installed, you can deploy the Edge Function directly t
    - Click **"Create function"**
 
 3. **Copy the Code**:
-   - Open the file: `E:\CODESPACES\FINAL YEAR\WHISTLE\supabase\functions\send-onboarding-email\index.ts`
+   - Open the file: `supabase/functions/send-onboarding-email/index.ts`
    - Copy ALL the code from that file
    - Paste it into the function editor in the Dashboard
    - Click **"Deploy"**
@@ -30,7 +30,7 @@ Since Supabase CLI is not installed, you can deploy the Edge Function directly t
 ### Step 2: Set Resend API Key Secret
 
 1. **Go to Edge Functions Settings**:
-   - Navigate to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/settings/functions
+   - Navigate to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/settings/functions
 
 2. **Add Secret**:
    - Click **"Add new secret"**
@@ -43,7 +43,7 @@ Since Supabase CLI is not installed, you can deploy the Edge Function directly t
 ### Step 3: Configure Database Webhook
 
 1. **Go to Database Webhooks**:
-   - Navigate to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/database/webhooks
+   - Navigate to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/database/webhooks
 
 2. **Create New Webhook**:
    - Click **"Create a new hook"**
@@ -57,7 +57,7 @@ Since Supabase CLI is not installed, you can deploy the Edge Function directly t
    | **Events** | ✓ INSERT (check only this box) |
    | **Type** | `HTTP Request` |
    | **Method** | `POST` |
-   | **URL** | `https://cdadbfkxivbaznhrsswn.supabase.co/functions/v1/send-onboarding-email` |
+   | **URL** | `https://[YOUR_PROJECT_ID].supabase.co/functions/v1/send-onboarding-email` |
 
 4. **Add HTTP Headers**:
    - Click **"Add header"**
@@ -69,7 +69,7 @@ Since Supabase CLI is not installed, you can deploy the Edge Function directly t
      - Value: `application/json`
 
    **To get your Service Role Key**:
-   - Go to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/settings/api
+   - Go to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/settings/api
    - Copy the `service_role` key (NOT the `anon` key)
    - Replace `[YOUR_SERVICE_ROLE_KEY]` with the actual key
 
@@ -111,8 +111,8 @@ Since Supabase CLI is not installed, you can deploy the Edge Function directly t
 
 The migration file `09_onboarding_email_webhook.sql` is just documentation. You can skip this or run it manually:
 
-1. Go to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/sql/new
-2. Copy the contents of `E:\CODESPACES\FINAL YEAR\WHISTLE\supabase\migrations\09_onboarding_email_webhook.sql`
+1. Go to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/sql/new
+2. Copy the contents of `supabase/migrations/09_onboarding_email_webhook.sql`
 3. Paste and click **"Run"**
 
 ---
@@ -121,7 +121,7 @@ The migration file `09_onboarding_email_webhook.sql` is just documentation. You 
 
 #### Method 1: Insert Test User via Dashboard
 
-1. Go to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/editor (Table Editor)
+1. Go to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/editor (Table Editor)
 2. Select the `users` table
 3. Click **"Insert row"**
 4. Fill in:
@@ -141,7 +141,7 @@ Simply sign up a new user through your application's normal signup flow.
 
 #### Check Edge Function Logs
 
-1. Go to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/functions/send-onboarding-email/logs
+1. Go to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/functions/send-onboarding-email/logs
 2. Look for successful execution logs
 3. Check for any errors
 
@@ -153,7 +153,7 @@ Simply sign up a new user through your application's normal signup flow.
 
 #### Verify Webhook Logs
 
-1. Go to: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/database/webhooks
+1. Go to: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/database/webhooks
 2. Click on your `send-onboarding-email` webhook
 3. View the execution logs
 
@@ -231,8 +231,8 @@ Once everything is working:
 
 ## 🎯 Quick Links
 
-- **Edge Functions**: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/functions
-- **Database Webhooks**: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/database/webhooks
-- **API Settings**: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/settings/api
-- **Table Editor**: https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/editor
+- **Edge Functions**: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/functions
+- **Database Webhooks**: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/database/webhooks
+- **API Settings**: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/settings/api
+- **Table Editor**: https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/editor
 - **Resend Dashboard**: https://resend.com/emails

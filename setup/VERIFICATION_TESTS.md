@@ -10,7 +10,7 @@ Your Supabase database is now live with all 12 tables, RLS policies, triggers, a
 
 ### 1. Verify Tables in Supabase Dashboard
 
-Go to [Table Editor](https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/editor)
+Go to [Table Editor](https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/editor)
 
 Check these tables exist:
 - ✅ users

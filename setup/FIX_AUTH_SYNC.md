@@ -13,7 +13,7 @@ Execute the new migration file to create a sync trigger.
 
 ## Step 1: Execute New Migration File
 
-1. Go to [Supabase SQL Editor](https://supabase.com/dashboard/project/cdadbfkxivbaznhrsswn/sql)
+1. Go to [Supabase SQL Editor](https://supabase.com/dashboard/project/[YOUR_PROJECT_ID]/sql)
 2. Open and execute: `supabase/migrations/06_sync_auth_users.sql`
 
 This creates a trigger that automatically:

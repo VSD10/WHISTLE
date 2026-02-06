@@ -12,7 +12,7 @@ To host your email logo reliable, follow these steps in your Supabase Dashboard:
 ## 2. Upload the Logo
 1. Open the `brand-assets` bucket you just created.
 2. Click **Upload File**.
-3. Upload the `WHISTLE (1).png` file from your computer. Or download it from here if you don't have it handy: `E:\CODESPACES\FINAL YEAR\WHISTLE\supabase\functions\send-onboarding-email\WHISTLE (1).png`.
+3. Upload the `WHISTLE (1).png` file from your computer. (Located in `supabase/functions/send-onboarding-email/WHISTLE (1).png`)
 
 ## 3. Get the Public URL
 1. Once uploaded, click on the file `WHISTLE (1).png`.
