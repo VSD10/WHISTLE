@@ -6,8 +6,10 @@ import Hero from './components/Hero';
 import ProblemSection from './components/ProblemSection';
 import HowItWorks from './components/HowItWorks';
 import SystemWorkflow from './components/SystemWorkflow';
+import AiCapabilities from './components/AiCapabilities';
 import Features from './components/Features';
 import Benchmarks from './components/Benchmarks';
+import Updates from './components/Updates';
 import Domains from './components/Domains';
 import Footer from './components/Footer';
 import WaitlistModal from './components/WaitlistModal';
@@ -29,8 +31,10 @@ const HomePage: React.FC<{ onJoinWaitlist: () => void }> = ({ onJoinWaitlist }) 
     <ProblemSection />
     <HowItWorks />
     <SystemWorkflow />
+    <AiCapabilities />
     <Features />
     <Benchmarks />
+    <Updates />
     <Domains />
   </>
 );
