@@ -16,6 +16,10 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
     setIsMobileMenuOpen(false);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleSignOut = async () => {
     await signOut();
     closeMobileMenu();
@@ -34,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
           to="/"
           className="flex items-center gap-2 cursor-pointer group"
         >
-          <span className="material-symbols-outlined text-neon-green group-hover:rotate-90 transition-transform duration-500">radar</span>
+          <img src="/whistle.png" alt="Whistle" className="w-8 h-8 group-hover:rotate-12 transition-transform duration-500" style={{ filter: 'brightness(0) saturate(100%) invert(78%) sepia(86%) saturate(1644%) hue-rotate(68deg) brightness(104%) contrast(115%)' }} />
           <span className="font-header text-2xl tracking-tighter">WHISTLE</span>
         </Link>
 
@@ -43,24 +47,21 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
           <NavLink
             to="/"
             className={`nav-link ${isActive('/') ? 'text-neon-green' : 'text-white'}`}
+            onClick={scrollToTop}
           >
             Home
           </NavLink>
           <NavLink
             to="/about"
             className={`nav-link ${isActive('/about') ? 'text-neon-green' : 'text-white'}`}
+            onClick={scrollToTop}
           >
             About
           </NavLink>
           <NavLink
-            to="/pricing"
-            className={`nav-link ${isActive('/pricing') ? 'text-neon-green' : 'text-white'}`}
-          >
-            Pricing
-          </NavLink>
-          <NavLink
             to="/changelog"
             className={`nav-link ${isActive('/changelog') ? 'text-neon-green' : 'text-white'}`}
+            onClick={scrollToTop}
           >
             Updates
           </NavLink>
@@ -141,28 +142,21 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
           <NavLink
             to="/"
             className={`text-2xl font-header uppercase tracking-widest ${isActive('/') ? 'text-neon-green' : 'text-white'}`}
-            onClick={closeMobileMenu}
+            onClick={() => { closeMobileMenu(); scrollToTop(); }}
           >
             Home
           </NavLink>
           <NavLink
             to="/about"
             className={`text-2xl font-header uppercase tracking-widest ${isActive('/about') ? 'text-neon-green' : 'text-white'}`}
-            onClick={closeMobileMenu}
+            onClick={() => { closeMobileMenu(); scrollToTop(); }}
           >
             About
           </NavLink>
           <NavLink
-            to="/pricing"
-            className={`text-2xl font-header uppercase tracking-widest ${isActive('/pricing') ? 'text-neon-green' : 'text-white'}`}
-            onClick={closeMobileMenu}
-          >
-            Pricing
-          </NavLink>
-          <NavLink
             to="/changelog"
             className={`text-2xl font-header uppercase tracking-widest ${isActive('/changelog') ? 'text-neon-green' : 'text-white'}`}
-            onClick={closeMobileMenu}
+            onClick={() => { closeMobileMenu(); scrollToTop(); }}
           >
             Updates
           </NavLink>

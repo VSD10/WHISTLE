@@ -6,6 +6,19 @@ const Changelog: React.FC = () => {
 
     const logs = [
         {
+            version: 'v2.5.0',
+            date: '2026.03.03',
+            title: 'UI_OVERHAUL_&_ICON_FIX',
+            changes: [
+                'Fixed root cause of Material Symbols icons rendering as text — added missing .material-symbols-outlined CSS class and corrected Google Fonts URL',
+                'Redesigned Parallel Workflow as a 4-model → 1 Verdict Agent flowchart with animated SVG data particles',
+                'Redesigned Series Workflow as horizontal chain pipeline: A1 RECEIVE → A2 ANALYZE → A3 REFINE → A4 VALIDATE → OUTPUT',
+                'Redesigned Personal AI RAG section with animated encrypted data streams, shield vault, and floating storage blocks',
+                'Redesigned Features section with per-card accent colors, gradient heading, and Material Symbol icons',
+                'Redesigned Benchmarks section with ✓/✗ indicators, hover glow effects, and summary stat badges',
+            ]
+        },
+        {
             version: 'v2.3.0',
             date: '2026.02.06',
             title: 'ONBOARDING_SYSTEM_&_DOCUMENTATION',

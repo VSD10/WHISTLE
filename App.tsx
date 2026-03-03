@@ -9,7 +9,6 @@ import SystemWorkflow from './components/SystemWorkflow';
 import AiCapabilities from './components/AiCapabilities';
 import Features from './components/Features';
 import Benchmarks from './components/Benchmarks';
-import Updates from './components/Updates';
 import Domains from './components/Domains';
 import Footer from './components/Footer';
 import WaitlistModal from './components/WaitlistModal';
@@ -34,7 +33,6 @@ const HomePage: React.FC<{ onJoinWaitlist: () => void }> = ({ onJoinWaitlist }) 
     <AiCapabilities />
     <Features />
     <Benchmarks />
-    <Updates />
     <Domains />
   </>
 );
