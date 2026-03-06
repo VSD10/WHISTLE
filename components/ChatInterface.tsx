@@ -14,8 +14,8 @@ const ChatInterface: React.FC = () => {
 
         // Trigger actual download
         const link = document.createElement('a');
-        link.href = '#';
-        link.download = 'WhistleAI-Setup-v2.0.4.msi';
+        link.href = 'https://github.com/VSD10/WHISTLE/releases/download/v1/Whistle_1.0.1_x64_en-US.msi';
+        link.download = 'Whistle_1.0.1_x64_en-US.msi';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -143,7 +143,7 @@ const ChatInterface: React.FC = () => {
                 <div className="glitch-bar flex justify-between items-center border-b border-neon-green/20 px-4">
                     <span className="text-[10px] sm:text-xs">SYSTEM_STATUS: SECURE_UPLINK_ESTABLISHED // DOWNLOAD_NODE_ACTIVE</span>
                     <div className="hidden md:flex gap-4 text-[10px] sm:text-xs">
-                        <span className="text-neon-green">VERSION: 2.0.4.RELEASE</span>
+                        <span className="text-neon-green">VERSION: 1.0.1.RELEASE</span>
                         <span>TARGET: WINDOWS_X64</span>
                     </div>
                 </div>
@@ -172,7 +172,7 @@ const ChatInterface: React.FC = () => {
                         <div>
                             <div className="inline-flex items-center gap-2 px-3 py-1 glass-panel text-[10px] text-neon-green border-neon-green/50 font-bold mb-6 tracking-widest">
                                 <span className="w-2 h-2 bg-neon-green rounded-full animate-ping"></span>
-                                NEW_RELEASE_v2.0.4
+                                NEW_RELEASE_v1.0.1
                             </div>
                             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-header font-black leading-[0.9] tracking-tighter mb-6">
                                 UNLEASH <br />
@@ -429,7 +429,7 @@ const ChatInterface: React.FC = () => {
                                     {[
                                         { val: '142', unit: 'MB', label: 'SIZE' },
                                         { val: 'x64', unit: '', label: 'ARCH' },
-                                        { val: 'v2.0', unit: '.4', label: 'BUILD' },
+                                        { val: 'v1.0', unit: '.1', label: 'BUILD' },
                                     ].map((s) => (
                                         <div key={s.label} className="bg-white/[0.03] border border-white/5 rounded-lg py-2 px-3">
                                             <div className="text-white font-header font-bold text-sm">{s.val}<span className="text-neon-green">{s.unit}</span></div>
@@ -448,14 +448,14 @@ const ChatInterface: React.FC = () => {
                                         &gt; DOWNLOAD_INITIATED // PACKAGE_VERIFIED ✓
                                     </div>
                                     <div className="text-white/40 text-[10px] mt-2">
-                                        &gt; WHISTLE_v2.0.4_x64.msi — Ready for installation
+                                        &gt; Whistle_1.0.1_x64_en-US.msi — Ready for installation
                                     </div>
                                 </div>
 
                                 {/* Fallback download */}
                                 <div className="flex items-center justify-center gap-2 text-white/30 text-[10px] font-mono tracking-wider mb-6">
                                     <span>DOWNLOAD NOT WORKING?</span>
-                                    <a href="#" download="WhistleAI-Setup-v2.0.4.msi" className="text-neon-green hover:text-white transition-colors border-b border-neon-green/30 hover:border-white">
+                                    <a href="https://github.com/VSD10/WHISTLE/releases/download/v1/Whistle_1.0.1_x64_en-US.msi" download="Whistle_1.0.1_x64_en-US.msi" className="text-neon-green hover:text-white transition-colors border-b border-neon-green/30 hover:border-white">
                                         CLICK HERE
                                     </a>
                                 </div>
