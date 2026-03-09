@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface HeroProps {
   onJoinWaitlist: () => void;
@@ -33,15 +34,15 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
             </div>
           </h1>
           <p className="text-xl md:text-2xl text-white/70 font-mono max-w-2xl mb-12 leading-tight animate-slide-up delay-500">
-          WHISTLE is a multi-agent AI verification system that improves trust in AI answers through parallel consensus logic. </p>
+            WHISTLE is a multi-agent AI verification system that improves trust in AI answers through parallel consensus logic. </p>
           <div className="flex flex-col md:flex-row gap-4 items-start md:items-center animate-slide-up delay-700">
             <div className="group relative">
-              <button
-                onClick={onJoinWaitlist}
-                className="px-12 py-5 bg-white text-black font-condensed text-xl hover:bg-neon-green transition-all uppercase skew-x-[-12deg] w-full md:w-auto"
+              <Link
+                to="/login"
+                className="px-12 py-5 bg-white text-black font-condensed text-xl hover:bg-neon-green transition-all uppercase skew-x-[-12deg] w-full md:w-auto inline-block text-center"
               >
-                Join Waitlist
-              </button>
+               🚀 Get Early Access
+              </Link>
               <div className="absolute -bottom-6 left-0 text-[9px] text-white/40 uppercase font-mono tracking-widest">
                 Limited Access // [0x334...]
               </div>
