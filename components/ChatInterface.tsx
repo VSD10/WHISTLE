@@ -8,14 +8,49 @@ const ChatInterface: React.FC = () => {
     const [progress, setProgress] = useState(0);
     const [showThankYou, setShowThankYou] = useState(false);
 
-    const handleDownload = () => {
+    // Version Configuration
+    const versions = {
+        'v1.0.2': {
+            id: 'v1.0.2',
+            url: 'https://github.com/VSD10/WHISTLE/releases/download/V2/Whistle_1.0.2_x64-setup.exe',
+            filename: 'Whistle_1.0.2_x64-setup.exe',
+            type: 'EXECUTABLE (.EXE)',
+            size: '148MB',
+            build: 'v1.0.2',
+            major: 'v1.0',
+            minor: '.2',
+            releaseDate: 'MAR 2026'
+        },
+        'v1.0.1': {
+            id: 'v1.0.1',
+            url: 'https://github.com/VSD10/WHISTLE/releases/download/v1/Whistle_1.0.1_x64_en-US.msi',
+            filename: 'Whistle_1.0.1_x64_en-US.msi',
+            type: 'INSTALLER (.MSI)',
+            size: '142MB',
+            build: 'v1.0.1',
+            major: 'v1.0',
+            minor: '.1',
+            releaseDate: 'FEB 2026'
+        }
+    };
+
+    const latestVer = versions['v1.0.2'];
+    const [selectedVersion, setSelectedVersion] = useState<keyof typeof versions>('v1.0.2');
+    const currentVer = versions[selectedVersion];
+
+    const handleDownload = (verId?: keyof typeof versions) => {
         if (downloading) return;
+
+        const targetVersionId = verId || 'v1.0.2';
+        setSelectedVersion(targetVersionId);
+        const verToDownload = versions[targetVersionId];
+
         setDownloading(true);
 
         // Trigger actual download
         const link = document.createElement('a');
-        link.href = 'https://github.com/VSD10/WHISTLE/releases/download/v1/Whistle_1.0.1_x64_en-US.msi';
-        link.download = 'Whistle_1.0.1_x64_en-US.msi';
+        link.href = verToDownload.url;
+        link.download = verToDownload.filename;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -27,24 +62,9 @@ const ChatInterface: React.FC = () => {
         }, 3000);
     };
 
-    const handleLiveDemo = async () => {
-        try {
-            // Check if demo is reachable (ignoring CORS for a simple fetch, or rely on actual window open handling if preferable)
-            // Note: A simpler approach for an external link is just to open it, as the browser handles external 404s.
-            // But if we want to catch it *before* opening or handle it internally:
-            const demoUrl = "https://whistle-back-store-1.onrender.com/";
-            const res = await fetch(demoUrl, { mode: 'no-cors' });
-            // no-cors will always return an opaque response we can't fully read an error code from
-            // A safer real-world approach is to just window.open, but for the requirement to lead to an internal 404 page:
-            // Since we can't reliably ping an external render URL via pure frontend without CORS issues, 
-            // we will simulate the check or assume if you requested it we just try to open it and if it fails 
-            // (e.g., fetch throws entirely due to network), go to 404.
-
-            // In a real app we'd ping our own backend proxy. Here we just open it.
-            window.open(demoUrl, "_blank", "noopener,noreferrer");
-        } catch (error) {
-            navigate('/404');
-        }
+    const handleLiveDemo = () => {
+        const demoUrl = "https://whistle-back-store-1.onrender.com/";
+        window.open(demoUrl, "_blank", "noopener,noreferrer");
     };
 
     return (
@@ -143,7 +163,7 @@ const ChatInterface: React.FC = () => {
                 <div className="glitch-bar flex justify-between items-center border-b border-neon-green/20 px-4">
                     <span className="text-[10px] sm:text-xs">SYSTEM_STATUS: SECURE_UPLINK_ESTABLISHED // DOWNLOAD_NODE_ACTIVE</span>
                     <div className="hidden md:flex gap-4 text-[10px] sm:text-xs">
-                        <span className="text-neon-green">VERSION: 1.0.1.RELEASE</span>
+                        <span className="text-neon-green">VERSION: {latestVer.build}.RELEASE</span>
                         <span>TARGET: WINDOWS_X64</span>
                     </div>
                 </div>
@@ -172,7 +192,7 @@ const ChatInterface: React.FC = () => {
                         <div>
                             <div className="inline-flex items-center gap-2 px-3 py-1 glass-panel text-[10px] text-neon-green border-neon-green/50 font-bold mb-6 tracking-widest">
                                 <span className="w-2 h-2 bg-neon-green rounded-full animate-ping"></span>
-                                NEW_RELEASE_v1.0.1
+                                NEW_RELEASE_{latestVer.id}
                             </div>
                             <h2 className="text-5xl sm:text-6xl lg:text-7xl font-header font-black leading-[0.9] tracking-tighter mb-6">
                                 UNLEASH <br />
@@ -188,7 +208,7 @@ const ChatInterface: React.FC = () => {
                         <div className="space-y-4">
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <button
-                                    onClick={handleDownload}
+                                    onClick={() => handleDownload('v1.0.2')}
                                     disabled={downloading}
                                     className={`group relative flex items-center justify-between w-full sm:w-[400px] p-1 border ${downloading ? 'border-white/20 bg-white/5' : 'border-neon-green/50 btn-neon-sweep hover:border-neon-green btn-glow'} transition-all duration-300 overflow-hidden cursor-pointer shadow-[0_0_15px_rgba(57,255,20,0.1)] hover:shadow-[0_0_30px_rgba(57,255,20,0.4)]`}
                                 >
@@ -212,7 +232,7 @@ const ChatInterface: React.FC = () => {
                                             {downloading ? 'DOWNLOADING...' : 'DOWNLOAD FOR WINDOWS'}
                                         </div>
                                         <div className="text-[10px] font-mono text-white/40 tracking-widest mt-1 flex justify-between">
-                                            <span>{downloading ? `PROGRESS: ${Math.round(progress)}%` : 'INSTALLER (.MSI) // 142MB'}</span>
+                                            <span>{downloading ? `PROGRESS: ${Math.round(progress)}%` : `${latestVer.type} // ${latestVer.size}`}</span>
                                             {downloading && <span className="text-neon-green">{Math.round(progress)}%</span>}
                                         </div>
                                     </div>
@@ -347,6 +367,39 @@ const ChatInterface: React.FC = () => {
                     </div>
                 </div >
 
+                {/* Legacy Releases Section */}
+                <div className="w-full max-w-6xl mt-8 mb-24 animate-slide-up relative z-10" style={{ animationDelay: '0.3s' }}>
+                    <div className="flex items-center gap-4 mb-6">
+                        <h3 className="text-xl font-header font-bold text-white uppercase tracking-wider">PREVIOUS_RELEASES</h3>
+                        <div className="flex-1 h-px bg-white/10"></div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {Object.values(versions).filter(v => v.id !== 'v1.0.2').map(ver => (
+                            <div key={ver.id} className="glass-panel p-5 border-l-2 border-l-white/30 hover:border-l-neon-green hover:bg-white/5 transition-all group">
+                                <div className="flex justify-between items-start mb-4">
+                                    <div>
+                                        <div className="text-lg font-bold text-white group-hover:text-neon-green transition-colors">{ver.id}</div>
+                                        <div className="text-[10px] text-white/40 tracking-widest">{ver.releaseDate}</div>
+                                    </div>
+                                    <span className="text-[9px] font-mono border border-white/10 px-2 py-1 rounded bg-white/5">{ver.type}</span>
+                                </div>
+                                <div className="flex justify-between items-end">
+                                    <div className="text-xs text-white/50">{ver.filename} • {ver.size}</div>
+                                    <button
+                                        onClick={() => handleDownload(ver.id as keyof typeof versions)}
+                                        className="text-white/50 hover:text-white transition-colors p-2 bg-white/5 hover:bg-white/10 rounded"
+                                        title={`Download ${ver.id}`}
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-neon-green group-hover:animate-bounce">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" x2="12" y1="15" y2="3" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
             </main >
 
             <Footer />
@@ -427,9 +480,9 @@ const ChatInterface: React.FC = () => {
                                 {/* Stats row */}
                                 <div className="grid grid-cols-3 gap-3 mb-6">
                                     {[
-                                        { val: '142', unit: 'MB', label: 'SIZE' },
+                                        { val: currentVer.size.replace(/\D/g, ''), unit: currentVer.size.replace(/\d/g, ''), label: 'SIZE' },
                                         { val: 'x64', unit: '', label: 'ARCH' },
-                                        { val: 'v1.0', unit: '.1', label: 'BUILD' },
+                                        { val: currentVer.major, unit: currentVer.minor, label: 'BUILD' },
                                     ].map((s) => (
                                         <div key={s.label} className="bg-white/[0.03] border border-white/5 rounded-lg py-2 px-3">
                                             <div className="text-white font-header font-bold text-sm">{s.val}<span className="text-neon-green">{s.unit}</span></div>
@@ -448,14 +501,14 @@ const ChatInterface: React.FC = () => {
                                         &gt; DOWNLOAD_INITIATED // PACKAGE_VERIFIED ✓
                                     </div>
                                     <div className="text-white/40 text-[10px] mt-2">
-                                        &gt; Whistle_1.0.1_x64_en-US.msi — Ready for installation
+                                        &gt; {currentVer.filename} — Ready for installation
                                     </div>
                                 </div>
 
                                 {/* Fallback download */}
                                 <div className="flex items-center justify-center gap-2 text-white/30 text-[10px] font-mono tracking-wider mb-6">
                                     <span>DOWNLOAD NOT WORKING?</span>
-                                    <a href="https://github.com/VSD10/WHISTLE/releases/download/v1/Whistle_1.0.1_x64_en-US.msi" download="Whistle_1.0.1_x64_en-US.msi" className="text-neon-green hover:text-white transition-colors border-b border-neon-green/30 hover:border-white">
+                                    <a href={currentVer.url} download={currentVer.filename} className="text-neon-green hover:text-white transition-colors border-b border-neon-green/30 hover:border-white">
                                         CLICK HERE
                                     </a>
                                 </div>

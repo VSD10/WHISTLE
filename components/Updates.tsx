@@ -3,6 +3,15 @@ import React from 'react';
 const Updates: React.FC = () => {
     const updates = [
         {
+            version: 'v1.0.2',
+            date: 'Mar 9, 2026',
+            title: 'Stable Distribution v1.0.2',
+            desc: 'New distribution release: Whistle_1.0.2_x64-setup.exe. Improved installation stability and added cross-version selection support in the download hub.',
+            tag: 'NEW',
+            tagColor: '#39ff14',
+            icon: 'rocket_launch',
+        },
+        {
             version: 'v2.5.0',
             date: 'Mar 3, 2026',
             title: 'Parallel Workflow Redesign',

@@ -6,6 +6,18 @@ const Changelog: React.FC = () => {
 
     const logs = [
         {
+            version: 'v1.0.2',
+            date: '2026.03.09',
+            title: 'STABLE_DISTRIBUTION_UPGRADE',
+            changes: [
+                'Upgraded distribution format to Executable Setup (.exe) for improved installation reliability',
+                'Integrated multi-version download selector in the Desktop Client hub',
+                'Optimized backend connection pooling for decentralized verification nodes',
+                'Synchronized build v1.0.2 across production release channels',
+                'Enhanced setup wizard with automated environment verification'
+            ]
+        },
+        {
             version: 'v2.5.0',
             date: '2026.03.03',
             title: 'UI_OVERHAUL_&_ICON_FIX',
