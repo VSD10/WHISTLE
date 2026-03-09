@@ -6,7 +6,16 @@ const Changelog: React.FC = () => {
 
     const logs = [
         {
-            version: 'v1.0.2',
+            version: 'v2.5.3',
+            date: '2026.03.09',
+            title: 'LANDING_PAGE_OPTIMIZATION',
+            changes: [
+                'Updated Hero section CTA: Replaced "Join Waitlist" with "🚀 Get Early Access"',
+                'Modified Hero CTA routing to redirect directly to the Authentication (/login) portal'
+            ]
+        },
+        {
+            version: 'v2.5.2',
             date: '2026.03.09',
             title: 'STABLE_DISTRIBUTION_UPGRADE',
             changes: [
