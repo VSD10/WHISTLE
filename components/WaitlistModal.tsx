@@ -46,7 +46,7 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
                     <div>
                         <div className="mb-8 border-b border-white/10 pb-6">
                             <span className="text-[10px] text-neon-green tracking-widest uppercase font-mono mb-2 block">// ACCESS_REQUEST</span>
-                            <h2 className="text-3xl font-header font-black uppercase tracking-tighter text-white">Join Waitlist</h2>
+                            <h2 className="text-3xl font-header font-black uppercase tracking-tighter text-white">Try Our Beta</h2>
                             <p className="text-white/50 font-mono text-xs mt-2">
                                 Initialize your sequence. Early nodes receive priority verification access upon system launch.
                             </p>

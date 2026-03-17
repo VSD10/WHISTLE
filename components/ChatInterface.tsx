@@ -10,6 +10,39 @@ const ChatInterface: React.FC = () => {
 
     // Version Configuration
     const versions = {
+        'v5.0.0': {
+            id: 'v5.0.0',
+            url: 'https://github.com/VSD10/WHISTLE/releases/download/v5/Whistle_5.0.0_x64_en-US.msi',
+            filename: 'Whistle_5.0.0_x64_en-US.msi',
+            type: 'INSTALLER (.MSI)',
+            size: '152MB',
+            build: 'v5.0.0',
+            major: 'v5.0',
+            minor: '.0',
+            releaseDate: 'MAR 2026'
+        },
+        'v4.0.0': {
+            id: 'v4.0.0',
+            url: 'https://github.com/VSD10/WHISTLE/releases/download/v4/Whistle_4.0.0_x64_en-US.msi',
+            filename: 'Whistle_4.0.0_x64_en-US.msi',
+            type: 'INSTALLER (.MSI)',
+            size: '150MB',
+            build: 'v4.0.0',
+            major: 'v4.0',
+            minor: '.0',
+            releaseDate: 'MAR 2026'
+        },
+        'v3.0.0': {
+            id: 'v3.0.0',
+            url: 'https://github.com/VSD10/WHISTLE/releases/download/V3/Whistle_3.0.0_x64-setup.exe',
+            filename: 'Whistle_3.0.0_x64-setup.exe',
+            type: 'EXECUTABLE (.EXE)',
+            size: '148MB',
+            build: 'v3.0.0',
+            major: 'v3.0',
+            minor: '.0',
+            releaseDate: 'MAR 2026'
+        },
         'v1.0.2': {
             id: 'v1.0.2',
             url: 'https://github.com/VSD10/WHISTLE/releases/download/V2/Whistle_1.0.2_x64-setup.exe',
@@ -34,14 +67,14 @@ const ChatInterface: React.FC = () => {
         }
     };
 
-    const latestVer = versions['v1.0.2'];
-    const [selectedVersion, setSelectedVersion] = useState<keyof typeof versions>('v1.0.2');
+    const latestVer = versions['v5.0.0'];
+    const [selectedVersion, setSelectedVersion] = useState<keyof typeof versions>('v5.0.0');
     const currentVer = versions[selectedVersion];
 
     const handleDownload = (verId?: keyof typeof versions) => {
         if (downloading) return;
 
-        const targetVersionId = verId || 'v1.0.2';
+        const targetVersionId = verId || 'v5.0.0';
         setSelectedVersion(targetVersionId);
         const verToDownload = versions[targetVersionId];
 
@@ -208,7 +241,7 @@ const ChatInterface: React.FC = () => {
                         <div className="space-y-4">
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <button
-                                    onClick={() => handleDownload('v1.0.2')}
+                                    onClick={() => handleDownload('v5.0.0')}
                                     disabled={downloading}
                                     className={`group relative flex items-center justify-between w-full sm:w-[400px] p-1 border ${downloading ? 'border-white/20 bg-white/5' : 'border-neon-green/50 btn-neon-sweep hover:border-neon-green btn-glow'} transition-all duration-300 overflow-hidden cursor-pointer shadow-[0_0_15px_rgba(57,255,20,0.1)] hover:shadow-[0_0_30px_rgba(57,255,20,0.4)]`}
                                 >
@@ -374,7 +407,7 @@ const ChatInterface: React.FC = () => {
                         <div className="flex-1 h-px bg-white/10"></div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {Object.values(versions).filter(v => v.id !== 'v1.0.2').map(ver => (
+                        {Object.values(versions).filter(v => v.id !== 'v5.0.0').map(ver => (
                             <div key={ver.id} className="glass-panel p-5 border-l-2 border-l-white/30 hover:border-l-neon-green hover:bg-white/5 transition-all group">
                                 <div className="flex justify-between items-start mb-4">
                                     <div>

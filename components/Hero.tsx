@@ -17,7 +17,7 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
       <div className="relative z-10 container mx-auto px-6">
         <div className="max-w-5xl">
           <div className="inline-block border-l-2 border-neon-magenta pl-4 mb-6 animate-slide-up">
-            <span className="text-xs text-neon-magenta tracking-[0.3em] font-bold">SYSTEM_INIT // WAITLIST_OPEN</span>
+            <span className="text-xs text-neon-magenta tracking-[0.3em] font-bold">SYSTEM_INIT // BETA_ACCESS_OPEN</span>
           </div>
           <h1 className="text-4xl md:text-9xl font-header font-black leading-[0.85] tracking-tighter uppercase mb-8">
             <div className="overflow-hidden">
@@ -41,7 +41,7 @@ const Hero: React.FC<HeroProps> = ({ onJoinWaitlist }) => {
                 to="/login"
                 className="px-12 py-5 bg-white text-black font-condensed text-xl hover:bg-neon-green transition-all uppercase skew-x-[-12deg] w-full md:w-auto inline-block text-center"
               >
-               🚀 Get Early Access
+                🚀 Get Early Access
               </Link>
               <div className="absolute -bottom-6 left-0 text-[9px] text-white/40 uppercase font-mono tracking-widest">
                 Limited Access // [0x334...]

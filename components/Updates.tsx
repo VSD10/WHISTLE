@@ -3,13 +3,31 @@ import React from 'react';
 const Updates: React.FC = () => {
     const updates = [
         {
+            version: 'v5.0.0',
+            date: 'Mar 17, 2026',
+            title: 'Major Release v5.0.0',
+            desc: 'Latest stable build: Whistle_5.0.0_x64_en-US.msi. Significant AI inference performance improvements, enhanced multi-model consensus, and new system tray integration.',
+            tag: 'LATEST',
+            tagColor: '#39ff14',
+            icon: 'rocket_launch',
+        },
+        {
+            version: 'v4.0.0',
+            date: 'Mar 17, 2026',
+            title: 'Distribution Update v4.0.0',
+            desc: 'Released Whistle_4.0.0_x64_en-US.msi. Improved local model loading, VRAM management, and stability fixes for the consensus engine under high load.',
+            tag: 'STABLE',
+            tagColor: '#39ff14',
+            icon: 'download',
+        },
+        {
             version: 'v1.0.2',
             date: 'Mar 9, 2026',
             title: 'Stable Distribution v1.0.2',
             desc: 'New distribution release: Whistle_1.0.2_x64-setup.exe. Improved installation stability and added cross-version selection support in the download hub.',
-            tag: 'NEW',
-            tagColor: '#39ff14',
-            icon: 'rocket_launch',
+            tag: 'LEGACY',
+            tagColor: '#888',
+            icon: 'history',
         },
         {
             version: 'v2.5.0',

@@ -6,6 +6,29 @@ const Changelog: React.FC = () => {
 
     const logs = [
         {
+            version: 'v5.0.0',
+            date: '2026.03.17',
+            title: 'MAJOR_RELEASE_v5',
+            changes: [
+                'Latest stable release: Whistle_5.0.0_x64_en-US.msi (152MB)',
+                'Significant performance improvements to local AI inference engine',
+                'Enhanced multi-model consensus accuracy and verification speed',
+                'Improved Windows installer with silent install support',
+                'New system tray integration for background verification nodes'
+            ]
+        },
+        {
+            version: 'v4.0.0',
+            date: '2026.03.17',
+            title: 'DISTRIBUTION_UPDATE_v4',
+            changes: [
+                'Released Whistle_4.0.0_x64_en-US.msi (150MB) for Windows x64',
+                'Improved local model loading and VRAM management',
+                'Stability fixes for consensus engine under high load',
+                'Updated onboarding flow with guided configuration wizard'
+            ]
+        },
+        {
             version: 'v2.5.3',
             date: '2026.03.09',
             title: 'LANDING_PAGE_OPTIMIZATION',
