@@ -22,6 +22,8 @@ import ChatInterface from './components/ChatInterface';
 import NotFound from './components/NotFound';
 import LoadingScreen from './components/LoadingScreen';
 import Changelog from './components/Changelog';
+import Protocol from './components/Protocol';
+import ProtocolApiConfig from './components/ProtocolApiConfig';
 
 // Home page component
 const HomePage: React.FC<{ onJoinWaitlist: () => void }> = ({ onJoinWaitlist }) => (
@@ -119,6 +121,24 @@ const App: React.FC = () => {
                   <Changelog />
                 </main>
                 <Footer />
+              </>
+            } />
+
+            <Route path="/protocol" element={
+              <>
+                <Header onJoinWaitlist={handleOpenWaitlist} />
+                <main className="flex-grow">
+                  <Protocol />
+                </main>
+              </>
+            } />
+
+            <Route path="/protocol/api-config" element={
+              <>
+                <Header onJoinWaitlist={handleOpenWaitlist} />
+                <main className="flex-grow">
+                  <ProtocolApiConfig />
+                </main>
               </>
             } />
 

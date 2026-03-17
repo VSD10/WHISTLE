@@ -65,7 +65,13 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
           >
             Updates
           </NavLink>
-          <button className="nav-link text-white/50 cursor-not-allowed">Protocol</button>
+          <NavLink
+            to="/protocol"
+            className={`nav-link ${isActive('/protocol') ? 'text-neon-green' : 'text-white'}`}
+            onClick={scrollToTop}
+          >
+            Protocol
+          </NavLink>
 
           <div className="flex items-center gap-4 ml-4 pl-4 border-l border-white/10">
             {user ? (
@@ -159,6 +165,13 @@ const Header: React.FC<HeaderProps> = ({ onJoinWaitlist }) => {
             onClick={() => { closeMobileMenu(); scrollToTop(); }}
           >
             Updates
+          </NavLink>
+          <NavLink
+            to="/protocol"
+            className={`text-2xl font-header uppercase tracking-widest ${isActive('/protocol') ? 'text-neon-green' : 'text-white'}`}
+            onClick={() => { closeMobileMenu(); scrollToTop(); }}
+          >
+            Protocol
           </NavLink>
           <div className="w-12 h-[1px] bg-white/20 my-2"></div>
 
