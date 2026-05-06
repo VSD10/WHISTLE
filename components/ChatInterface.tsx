@@ -15,7 +15,7 @@ const ChatInterface: React.FC = () => {
             url: 'https://github.com/VSD10/WHISTLE/releases/download/v6/Whistle_6.0.0_x64-setup.exe',
             filename: 'Whistle_6.0.0_x64-setup.exe',
             type: 'EXECUTABLE (.EXE)',
-            size: '155MB',
+            size: '155MB', 
             build: 'v6.0.0',
             major: 'v6.0',
             minor: '.0',

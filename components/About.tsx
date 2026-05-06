@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageTransition from './PageTransition';
+import certDharshan    from '../src/certificates/dharshan.jpg';
+import certPriyadharshan from '../src/certificates/priyadhaeshan.jpg';
+import certBathrinath  from '../src/certificates/bathri.jpg';
+import certVasudevan   from '../src/certificates/vasu.jpg';
+
+const certificates = [
+  { id: 'CERT_01', name: 'DHARSHAN V S',       role: 'LEAD DEVELOPER',     color: 'neon-magenta', img: certDharshan },
+  { id: 'CERT_02', name: 'PRIYADHARSHAN D S',  role: 'LOGIC ARCHITECT',    color: 'neon-green',   img: certPriyadharshan },
+  { id: 'CERT_03', name: 'BATHRINATH K',        role: 'DATA ENGINEER',      color: 'neon-magenta', img: certBathrinath },
+  { id: 'CERT_04', name: 'VASUDEVAN M',         role: 'INTERFACE DESIGNER', color: 'neon-green',   img: certVasudevan },
+];
 
 const About: React.FC = () => {
+  const [lightbox, setLightbox] = useState<string | null>(null);
   return (
     <PageTransition label="ABOUT_PAGE">
       <div className="animate-fade-in">
@@ -266,7 +278,7 @@ const About: React.FC = () => {
                   <div className="col-span-8 p-6 flex flex-col justify-between">
                     <div>
                       <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Known Aliases</span>
-                      <span className="text-sm text-white/90 uppercase mb-4 block font-header text-2xl">VASUDEVAN V</span>
+                      <span className="text-sm text-white/90 uppercase mb-4 block font-header text-2xl">VASUDEVAN M</span>
                       <span className="text-[9px] text-neon-magenta/60 uppercase font-bold tracking-widest block mb-1">Operational Focus</span>
                       <span className="text-sm text-white/90 uppercase mb-4 block text-neon-green font-bold">INTERFACE DESIGNER</span>
                     </div>
@@ -282,8 +294,125 @@ const About: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="mt-32 text-center">
+        {/* ═══════════════════════════════════════════════════ */}
+        {/* RESEARCH CREDENTIALS — Journal Publication Certs   */}
+        {/* ═══════════════════════════════════════════════════ */}
+        <section className="py-32 bg-deep-black relative overflow-hidden">
+          {/* top glow divider */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-green/60 to-transparent" />
+          <div className="obstructed-text bottom-0 -right-10 z-0 select-none opacity-10 pointer-events-none">CERT</div>
+
+          {/* per-section animations */}
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes cert-spin     { to { transform: rotate(360deg);  } }
+            @keyframes cert-spin-rev { to { transform: rotate(-360deg); } }
+            @keyframes cert-scan {
+              0%   { top: -10%; opacity: 0.5; }
+              100% { top: 110%; opacity: 0;   }
+            }
+            .cert-ring-cw  { animation: cert-spin      12s linear infinite; }
+            .cert-ring-ccw { animation: cert-spin-rev   8s linear infinite; }
+            .cert-scan-bar { position: absolute; left:0; right:0; height: 40px;
+              background: linear-gradient(to bottom,transparent,rgba(57,255,20,0.07),transparent);
+              animation: cert-scan 3s ease-in-out infinite; pointer-events:none; }
+          `}} />
+
+          <div className="container mx-auto px-6 relative z-10">
+
+            {/* ── Section header ── */}
+            <div className="mb-16 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-6">
+              <div>
+                <span className="text-[10px] text-neon-green tracking-[0.35em] font-bold font-mono block mb-2">PUBLICATION_ARCHIVE // IJSREAT 2025</span>
+                <h2 className="text-3xl md:text-5xl font-header font-black uppercase tracking-tighter text-white">
+                  RESEARCH_<span className="text-neon-green">CREDENTIALS</span>
+                </h2>
+                <p className="text-xs text-white/35 uppercase tracking-widest font-mono mt-1">PEER REVIEWED &amp; CERTIFIED // ALL 4 AUTHORS</p>
+              </div>
+              <p className="text-xs text-neon-green uppercase tracking-widest font-mono animate-pulse shrink-0">● CERT_STATUS: VERIFIED</p>
+            </div>
+
+            {/* ── Certificate cards grid ── */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+              {certificates.map((cert) => {
+                const accent = cert.color === 'neon-green' ? '#39ff14' : '#ff00ff';
+                const accentClass = cert.color === 'neon-green'
+                  ? 'border-neon-green/40 hover:border-neon-green shadow-[0_0_30px_rgba(57,255,20,0.06)] hover:shadow-[0_0_50px_rgba(57,255,20,0.2)]'
+                  : 'border-neon-magenta/40 hover:border-neon-magenta shadow-[0_0_30px_rgba(255,0,255,0.06)] hover:shadow-[0_0_50px_rgba(255,0,255,0.2)]';
+                const badgeClass = cert.color === 'neon-green' ? 'bg-neon-green text-black' : 'bg-neon-magenta text-black';
+                const dotClass   = cert.color === 'neon-green' ? 'bg-neon-green shadow-[0_0_6px_#39ff14]' : 'bg-neon-magenta shadow-[0_0_6px_#ff00ff]';
+                return (
+                  <div
+                    key={cert.id}
+                    className={`group relative bg-[#080808] border ${accentClass} rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:z-10`}
+                    style={{ backgroundImage: 'repeating-linear-gradient(0deg,rgba(255,255,255,0.012) 0,rgba(255,255,255,0.012) 1px,transparent 1px,transparent 4px)' }}
+                    onClick={() => setLightbox(cert.img)}
+                  >
+                    {/* top stripe */}
+                    <div className="h-[3px] w-full" style={{ background: `linear-gradient(90deg,${accent},transparent,${accent})` }} />
+
+                    {/* card header */}
+                    <div className="flex items-center justify-between px-4 py-2 border-b border-white/8">
+                      <span className={`text-[9px] font-bold px-2 py-0.5 tracking-widest ${badgeClass}`}>{cert.id}</span>
+                      <div className={`w-1.5 h-1.5 rounded-full ${dotClass} animate-pulse`} />
+                    </div>
+
+                    {/* certificate image */}
+                    <div className="relative overflow-hidden">
+                      <div className="cert-scan-bar" />
+                      <img
+                        src={cert.img}
+                        alt={`${cert.name} — Journal Certificate`}
+                        className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        style={{ maxHeight: '260px', objectPosition: 'top' }}
+                      />
+                      {/* click overlay hint */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50">
+                        <div className="flex flex-col items-center gap-2">
+                          <span className="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                          <span className="text-[9px] text-white/80 font-mono tracking-widest">VIEW CERTIFICATE</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* card footer */}
+                    <div className="p-4 flex flex-col gap-1">
+                      <span className="text-[9px] text-white/30 font-mono tracking-widest">REGISTERED AUTHOR</span>
+                      <span className="font-header font-black text-white uppercase tracking-tight">{cert.name}</span>
+                      <span className="text-[10px] font-mono tracking-widest" style={{ color: accent }}>{cert.role}</span>
+                      <div className="mt-3 pt-3 border-t border-white/5 text-[8px] text-white/20 font-mono tracking-widest">
+                        IJSREAT // VOL.13 IS.02 // 2025
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* ── Publication metadata strip ── */}
+            <div className="mt-12 border border-white/8 bg-white/[0.02] rounded-lg p-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
+              {[
+                { label: 'JOURNAL',  value: 'IJSREAT' },
+                { label: 'VOLUME',   value: 'VOL.13 / ISSUE 02' },
+                { label: 'YEAR',     value: '2025' },
+                { label: 'ISSN',     value: '2347-6982' },
+              ].map((m) => (
+                <div key={m.label}>
+                  <div className="text-[8px] text-white/25 font-mono tracking-widest mb-1">{m.label}</div>
+                  <div className="text-sm font-header font-black text-white tracking-wide">{m.value}</div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* Summary of Operations */}
+        <section className="py-20 bg-deep-black relative">
+          <div className="container mx-auto px-6">
+            <div className="text-center">
               <div className="inline-block border border-neon-magenta/30 p-8 bg-data-gray/50 max-w-2xl">
                 <h3 className="font-header text-xl mb-4 text-neon-magenta uppercase">Summary of Operations</h3>
                 <p className="text-xs text-white/50 font-mono uppercase leading-relaxed tracking-widest">
@@ -298,6 +427,36 @@ const About: React.FC = () => {
             </div>
           </div>
         </section>
+
+        {/* ── Lightbox modal ── */}
+        {lightbox && (
+          <div
+            className="fixed inset-0 z-[500] flex items-center justify-center bg-black/95 backdrop-blur-sm"
+            onClick={() => setLightbox(null)}
+          >
+            {/* ambient glow */}
+            <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(57,255,20,0.06) 0%, transparent 60%)' }} />
+            {/* certificate image */}
+            <div
+              className="relative max-w-4xl w-full mx-4 border border-neon-green/30 rounded-lg overflow-hidden shadow-[0_0_80px_rgba(57,255,20,0.15)]"
+              onClick={(e) => e.stopPropagation()}
+              style={{ animation: 'modal-rise 0.4s cubic-bezier(0.16,1,0.3,1) forwards' }}
+            >
+              <div className="h-[3px] bg-gradient-to-r from-neon-green via-neon-magenta to-neon-green" />
+              <div className="flex items-center justify-between px-4 py-2 bg-[#080808] border-b border-white/10">
+                <span className="text-[10px] text-neon-green font-mono tracking-widest font-bold">CERTIFICATE_VIEW // FULL_RESOLUTION</span>
+                <button
+                  onClick={() => setLightbox(null)}
+                  className="text-white/40 hover:text-white transition-colors text-xs font-mono tracking-widest px-3 py-1 border border-white/10 hover:border-white/30 rounded"
+                >
+                  [CLOSE ✕]
+                </button>
+              </div>
+              <img src={lightbox} alt="Certificate" className="w-full object-contain bg-[#050505]" style={{ maxHeight: '80vh' }} />
+            </div>
+          </div>
+        )}
+
       </div>
     </PageTransition>
   );
