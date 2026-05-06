@@ -10,6 +10,17 @@ const ChatInterface: React.FC = () => {
 
     // Version Configuration
     const versions = {
+        'v6.0.0': {
+            id: 'v6.0.0',
+            url: 'https://github.com/VSD10/WHISTLE/releases/download/v6/Whistle_6.0.0_x64-setup.exe',
+            filename: 'Whistle_6.0.0_x64-setup.exe',
+            type: 'EXECUTABLE (.EXE)',
+            size: '155MB',
+            build: 'v6.0.0',
+            major: 'v6.0',
+            minor: '.0',
+            releaseDate: 'MAY 2026'
+        },
         'v5.0.0': {
             id: 'v5.0.0',
             url: 'https://github.com/VSD10/WHISTLE/releases/download/v5/Whistle_5.0.0_x64_en-US.msi',
@@ -67,14 +78,14 @@ const ChatInterface: React.FC = () => {
         }
     };
 
-    const latestVer = versions['v5.0.0'];
-    const [selectedVersion, setSelectedVersion] = useState<keyof typeof versions>('v5.0.0');
+    const latestVer = versions['v6.0.0'];
+    const [selectedVersion, setSelectedVersion] = useState<keyof typeof versions>('v6.0.0');
     const currentVer = versions[selectedVersion];
 
     const handleDownload = (verId?: keyof typeof versions) => {
         if (downloading) return;
 
-        const targetVersionId = verId || 'v5.0.0';
+        const targetVersionId = verId || 'v6.0.0';
         setSelectedVersion(targetVersionId);
         const verToDownload = versions[targetVersionId];
 
@@ -241,7 +252,7 @@ const ChatInterface: React.FC = () => {
                         <div className="space-y-4">
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <button
-                                    onClick={() => handleDownload('v5.0.0')}
+                                    onClick={() => handleDownload('v6.0.0')}
                                     disabled={downloading}
                                     className={`group relative flex items-center justify-between w-full sm:w-[400px] p-1 border ${downloading ? 'border-white/20 bg-white/5' : 'border-neon-green/50 btn-neon-sweep hover:border-neon-green btn-glow'} transition-all duration-300 overflow-hidden cursor-pointer shadow-[0_0_15px_rgba(57,255,20,0.1)] hover:shadow-[0_0_30px_rgba(57,255,20,0.4)]`}
                                 >
@@ -407,7 +418,7 @@ const ChatInterface: React.FC = () => {
                         <div className="flex-1 h-px bg-white/10"></div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {Object.values(versions).filter(v => v.id !== 'v5.0.0').map(ver => (
+                        {Object.values(versions).filter(v => v.id !== 'v6.0.0').map(ver => (
                             <div key={ver.id} className="glass-panel p-5 border-l-2 border-l-white/30 hover:border-l-neon-green hover:bg-white/5 transition-all group">
                                 <div className="flex justify-between items-start mb-4">
                                     <div>
