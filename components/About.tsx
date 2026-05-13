@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import PageTransition from './PageTransition';
-import certDharshan    from '../src/certificates/dharshan.jpg';
+import certDharshan from '../src/certificates/dharshan.jpg';
 import certPriyadharshan from '../src/certificates/priyadhaeshan.jpg';
-import certBathrinath  from '../src/certificates/bathri.jpg';
-import certVasudevan   from '../src/certificates/vasu.jpg';
+import certBathrinath from '../src/certificates/bathri.jpg';
+import certVasudevan from '../src/certificates/vasu.jpg';
 
 const certificates = [
-  { id: 'CERT_01', name: 'DHARSHAN V S',       role: 'LEAD DEVELOPER',     color: 'neon-magenta', img: certDharshan },
-  { id: 'CERT_02', name: 'PRIYADHARSHAN D S',  role: 'LOGIC ARCHITECT',    color: 'neon-green',   img: certPriyadharshan },
-  { id: 'CERT_03', name: 'BATHRINATH K',        role: 'DATA ENGINEER',      color: 'neon-magenta', img: certBathrinath },
-  { id: 'CERT_04', name: 'VASUDEVAN M',         role: 'INTERFACE DESIGNER', color: 'neon-green',   img: certVasudevan },
+  { id: 'CERT_01', name: 'DHARSHAN V S', role: 'LEAD DEVELOPER', color: 'neon-magenta', img: certDharshan },
+  { id: 'CERT_02', name: 'PRIYADHARSHAN D S', role: 'LOGIC ARCHITECT', color: 'neon-green', img: certPriyadharshan },
+  { id: 'CERT_03', name: 'BATHRINATH K', role: 'DATA ENGINEER', color: 'neon-magenta', img: certBathrinath },
+  { id: 'CERT_04', name: 'VASUDEVAN M', role: 'INTERFACE DESIGNER', color: 'neon-green', img: certVasudevan },
 ];
 
 const About: React.FC = () => {
@@ -152,8 +152,8 @@ const About: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-12 gap-0">
                   <div className="col-span-4 border-r border-white/10 p-2">
-                    <div className="w-full aspect-square bg-white/5 relative overflow-hidden flex items-center justify-center" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
-                      <img src="/DHARSHAN.png" alt="Dharshan" className="w-full h-full object-cover" />
+                    <div className="w-full aspect-[3/4] bg-white/5 relative overflow-hidden" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
+                      <img src="/DHARSHAN.png" alt="Dharshan" className="w-full h-full object-cover object-center" />
                       <div className="absolute bottom-2 left-2 text-[8px] bg-black/60 px-1 font-bold text-neon-green">LIVE_FEED</div>
                       <div className="absolute top-2 right-2 flex gap-1">
                         <div className="w-1 h-1 bg-red-500 rounded-full animate-pulse"></div>
@@ -193,8 +193,8 @@ const About: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-12 gap-0">
                   <div className="col-span-4 border-r border-white/10 p-2">
-                    <div className="w-full aspect-square bg-white/5 relative overflow-hidden flex items-center justify-center" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
-                      <img src="/PRIYADHARSHAN .jpg" alt="Priyadharshan" className="w-full h-full object-cover" />
+                    <div className="w-full aspect-[3/4] bg-white/5 relative overflow-hidden" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
+                      <img src="/PRIYADHARSHAN.jpeg" alt="Priyadharshan" className="w-full h-full object-cover object-center" />
                       <div className="absolute bottom-2 left-2 text-[8px] bg-black/60 px-1 font-bold text-neon-green">SECURE_LINK</div>
                     </div>
                     <div className="mt-2 text-[8px] text-white/30 font-mono">COORD: 51.5074 N // 0.1278 W</div>
@@ -231,8 +231,8 @@ const About: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-12 gap-0">
                   <div className="col-span-4 border-r border-white/10 p-2">
-                    <div className="w-full aspect-square bg-white/5 relative overflow-hidden flex items-center justify-center" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
-                      <img src="/BATHRINATH.jpg" alt="Bathrinath" className="w-full h-full object-cover" />
+                    <div className="w-full aspect-[3/4] bg-white/5 relative overflow-hidden" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
+                      <img src="/BATHRINATH.jpeg" alt="Bathrinath" className="w-full h-full object-cover object-center" />
                       <div className="absolute bottom-2 left-2 text-[8px] bg-black/60 px-1 font-bold text-neon-green">BUFFERING...</div>
                     </div>
                     <div className="mt-2 text-[8px] text-white/30 font-mono">COORD: 35.6762 N // 139.6503 E</div>
@@ -269,8 +269,8 @@ const About: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-12 gap-0">
                   <div className="col-span-4 border-r border-white/10 p-2">
-                    <div className="w-full aspect-square bg-white/5 relative overflow-hidden flex items-center justify-center" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
-                      <img src="/VASUDEVAN.jpg" alt="Vasudevan" className="w-full h-full object-cover object-[center_30%]" />
+                    <div className="w-full aspect-[3/4] bg-white/5 relative overflow-hidden" style={{ backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px)', backgroundSize: '100% 3px' }}>
+                      <img src="/VASUDEVAN.jpeg" alt="Vasudevan" className="w-full h-full object-cover object-center" />
                       <div className="absolute bottom-2 left-2 text-[8px] bg-black/60 px-1 font-bold text-neon-green">DATA_LOCKED</div>
                     </div>
                     <div className="mt-2 text-[8px] text-white/30 font-mono">COORD: 40.7128 N // 74.0060 W</div>
@@ -306,7 +306,8 @@ const About: React.FC = () => {
           <div className="obstructed-text bottom-0 -right-10 z-0 select-none opacity-10 pointer-events-none">CERT</div>
 
           {/* per-section animations */}
-          <style dangerouslySetInnerHTML={{ __html: `
+          <style dangerouslySetInnerHTML={{
+            __html: `
             @keyframes cert-spin     { to { transform: rotate(360deg);  } }
             @keyframes cert-spin-rev { to { transform: rotate(-360deg); } }
             @keyframes cert-scan {
@@ -342,7 +343,7 @@ const About: React.FC = () => {
                   ? 'border-neon-green/40 hover:border-neon-green shadow-[0_0_30px_rgba(57,255,20,0.06)] hover:shadow-[0_0_50px_rgba(57,255,20,0.2)]'
                   : 'border-neon-magenta/40 hover:border-neon-magenta shadow-[0_0_30px_rgba(255,0,255,0.06)] hover:shadow-[0_0_50px_rgba(255,0,255,0.2)]';
                 const badgeClass = cert.color === 'neon-green' ? 'bg-neon-green text-black' : 'bg-neon-magenta text-black';
-                const dotClass   = cert.color === 'neon-green' ? 'bg-neon-green shadow-[0_0_6px_#39ff14]' : 'bg-neon-magenta shadow-[0_0_6px_#ff00ff]';
+                const dotClass = cert.color === 'neon-green' ? 'bg-neon-green shadow-[0_0_6px_#39ff14]' : 'bg-neon-magenta shadow-[0_0_6px_#ff00ff]';
                 return (
                   <div
                     key={cert.id}
@@ -394,10 +395,10 @@ const About: React.FC = () => {
             {/* ── Publication metadata strip ── */}
             <div className="mt-12 border border-white/8 bg-white/[0.02] rounded-lg p-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
               {[
-                { label: 'JOURNAL',  value: 'IJSREAT' },
-                { label: 'VOLUME',   value: 'VOL.13 / ISSUE 02' },
-                { label: 'YEAR',     value: '2025' },
-                { label: 'ISSN',     value: '2347-6982' },
+                { label: 'JOURNAL', value: 'IJSREAT' },
+                { label: 'VOLUME', value: 'VOL.13 / ISSUE 02' },
+                { label: 'YEAR', value: '2025' },
+                { label: 'ISSN', value: '2347-6982' },
               ].map((m) => (
                 <div key={m.label}>
                   <div className="text-[8px] text-white/25 font-mono tracking-widest mb-1">{m.label}</div>
